@@ -1,0 +1,46 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Créer une bannière — Admin KIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/styles.css"></head><body>
+<div class="topbar"><div class="container topbar-inner"><span>Livraison à Kinshasa</span><span class="hide-mobile">Mobile Money • Visa • Mastercard</span><a href="index.html">Voir le site</a></div></div>
+<header class="header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">K</span><span class="brand-text"><strong>KIN</strong><small>VINS & SPIRITUEUX</small></span></a><nav id="navLinks"><a href="index.html">Accueil</a><a href="catalogue.html">Catalogue</a><a href="blog.html">Journal</a><a class="active" href="admin.html">Admin</a></nav><div class="nav-actions"><button class="cart-btn" id="cartBtn">Panier <span class="cart-count">0</span></button><button class="menu-btn" id="menuBtn">☰</button></div></div></header>
+<main><section class="page-hero"><div class="container"><p class="eyebrow">ADMINISTRATION</p><h1>Créer / modifier une bannière</h1></div></section><section class="section"><div class="container admin-layout"><aside class="panel admin-sidebar"><a href="admin.html">Dashboard</a><a href="admin-products.html">Produits</a><a href="admin-blog.html">Blog / SEO</a><a class="active" href="admin-banners.html">Bannières</a><a href="admin-clients.html">Clients</a><a href="stock.html">Stock</a><a href="orders.html">Commandes</a><a href="deliveries.html">Livraisons</a><a href="index.html">Voir la boutique</a></aside><div><form id="adminBannerForm"><div class="banner-editor-grid"><div class="panel banner-editor-main">
+<h2 style="font-size:2.6rem" id="bannerFormTitle">Créer une bannière</h2>
+<div class="form-grid">
+<label>Nom interne<input name="name" required placeholder="Accueil — Promo septembre"></label>
+<label>Emplacement<select name="zone"><option value="home_hero">Accueil — Hero</option><option value="home_promo">Accueil — Promo</option><option value="catalog_top">Catalogue — Haut</option><option value="blog_top">Blog — Haut</option><option value="pro_top">KIN PRO — Haut</option></select></label>
+<label class="span2">Titre<input name="title" placeholder="Une sélection premium livrée à Kinshasa"></label>
+<label class="span2">Sous-titre<textarea name="subtitle" placeholder="Votre message promotionnel…"></textarea></label>
+<label>Texte bouton<input name="buttonLabel" placeholder="Découvrir"></label>
+<label>Lien bouton<input name="buttonLink" placeholder="catalogue.html"></label>
+<label>Alignement<select name="textAlign"><option value="left">Gauche</option><option value="center">Centre</option><option value="right">Droite</option></select></label>
+<label>Opacité overlay (%)<input name="overlay" type="number" min="0" max="80" value="45"></label>
+<label>Ordre d’affichage<input name="order" type="number" min="0" value="1"></label>
+<label>Couleur fallback<input name="fallbackTone" type="color" value="#5c1623"></label>
+<label>Début diffusion<input name="startDate" type="date"></label>
+<label>Fin diffusion<input name="endDate" type="date"></label>
+<label class="span2">Texte alternatif image (SEO/accessibilité)<input name="alt" placeholder="Bannière promotionnelle KIN Vins & Spiritueux"></label>
+<label class="check-row"><input name="active" type="checkbox" checked> Bannière active</label>
+</div>
+
+<h3 style="margin-top:28px">Images</h3>
+<div class="banner-images-grid">
+ <div><p class="small muted">Desktop recommandé : 1920×700 ou 1600×600</p><div class="banner-image-preview" id="bannerImagePreview"><span>Aucune image desktop</span></div><label>URL / chemin image desktop<input name="imageUrl" placeholder="assets/images/banners/home-desktop.webp"></label><label>Ou fichier desktop<input name="imageFile" type="file" accept="image/*"></label><input type="hidden" name="imageData" id="bannerImageData"><button type="button" class="btn btn-outline" id="removeBannerImage">Retirer</button></div>
+ <div><p class="small muted">Mobile recommandé : 828×1000 ou 750×900</p><div class="banner-image-preview" id="bannerMobilePreview"><span>Aucune image mobile</span></div><label>URL / chemin image mobile<input name="mobileImageUrl" placeholder="assets/images/banners/home-mobile.webp"></label><label>Ou fichier mobile<input name="mobileImageFile" type="file" accept="image/*"></label><input type="hidden" name="mobileImageData" id="bannerMobileData"><button type="button" class="btn btn-outline" id="removeBannerMobileImage">Retirer</button></div>
+</div>
+
+<h3 style="margin-top:28px">Aperçu</h3><div class="banner-live-preview" id="bannerLivePreview"></div>
+</div>
+
+<div class="panel banner-editor-side">
+<h3>Conseils</h3><p class="small muted">Gardez le texte court et lisible. Placez les informations importantes loin des bords afin qu’elles restent visibles sur mobile.</p>
+<div class="seo-checklist">
+<div class="seo-check good"><span>✓</span> Image desktop séparée</div>
+<div class="seo-check good"><span>✓</span> Image mobile facultative</div>
+<div class="seo-check good"><span>✓</span> Texte alternatif</div>
+<div class="seo-check good"><span>✓</span> Dates de campagne</div>
+<div class="seo-check good"><span>✓</span> Ordre d’affichage</div>
+</div>
+<hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+<button class="btn btn-gold full" id="bannerSubmitLabel" type="submit">Créer la bannière</button><a class="btn btn-outline full" href="admin-banners.html" style="margin-top:8px">Annuler</a>
+</div></div></form></div></div></section></main>
+<footer><div class="container footer-bottom"><span>© 2026 KIN Vins & Spiritueux</span><a href="index.html">Voir la boutique</a></div></footer>
+<div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cartDrawer"><div class="drawer-head"><div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div><button class="icon-btn" id="closeCart">✕</button></div><div class="cart-items" id="drawerItems"></div><div class="drawer-foot"><div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div><a class="btn btn-gold full" href="cart.html">Voir le panier</a></div></aside><div class="toast" id="toast"></div><script src="assets/app.js"></script></body></html>

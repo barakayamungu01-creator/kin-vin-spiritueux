@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://kinvins.cd/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://kinvins.cd/catalogue.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kinvins.cd/blog.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kinvins.cd/b2b.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://kinvins.cd/login.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kinvins.cd/register.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://kinvins.cd/blog/choisir-vin-rouge-diner-kinshasa</loc><lastmod>2026-09-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kinvins.cd/blog/champagne-ou-vin-mousseux-differences</loc><lastmod>2026-09-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kinvins.cd/blog/whisky-single-malt-blend-age-guide</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kinvins.cd/blog/combien-bouteilles-reception</loc><lastmod>2026-09-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+</urlset>

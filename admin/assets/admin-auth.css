@@ -1,0 +1,13 @@
+
+html.admin-auth-pending body{visibility:hidden}
+.admin-login-body{min-height:100vh;background:radial-gradient(circle at 50% 10%,rgba(200,163,95,.16),transparent 34%),var(--bg)}
+.admin-login-shell{min-height:100vh;display:grid;place-items:center;padding:32px 18px}
+.admin-login-card{width:min(520px,100%);padding:38px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,#1b1512,#100d0b);box-shadow:var(--shadow)}
+.admin-login-brand{margin-bottom:36px}.admin-login-card h1{font-size:4rem;margin-bottom:14px}
+.admin-login-form{display:grid;gap:15px;margin-top:24px}.admin-login-form label{display:grid;gap:7px;color:#d6ccc2;font-size:.84rem}
+.admin-login-error{min-height:24px;color:#f2aaaa;font-size:.82rem}
+.admin-security-notice{padding:14px 16px;margin-top:20px;border-radius:12px;border:1px solid var(--line);font-size:.82rem}
+.admin-security-notice.locked{background:#331919;color:#efb5b5}.admin-security-notice.demo{background:#302817;color:#ead291}.admin-security-notice.ready{background:#15271b;color:#bee2c6}
+.admin-security-notice code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.admin-login-links{margin-top:20px;text-align:center}.admin-login-links a{color:var(--gold2);font-size:.82rem}
+.admin-logout-link{font-size:.78rem;color:#e9c985!important;border:1px solid rgba(200,163,95,.32);padding:8px 11px;border-radius:999px}

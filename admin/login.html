@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Connexion Administration — KIN Vins & Spiritueux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="assets/admin-auth.css">
+<script src="config.js"></script>
+<script src="admin-auth-common.js"></script>
+</head>
+<body class="admin-login-body">
+<main class="admin-login-shell">
+  <section class="admin-login-card">
+    <a class="brand admin-login-brand" href="../index.html">
+      <span class="brand-mark">K</span>
+      <span class="brand-text"><strong>KIN</strong><small>VINS & SPIRITUEUX</small></span>
+    </a>
+
+    <p class="eyebrow">ESPACE SÉCURISÉ</p>
+    <h1>Administration</h1>
+    <p class="muted">Cet espace est réservé aux administrateurs autorisés.</p>
+
+    <div class="admin-security-notice" id="adminConfigNotice"></div>
+
+    <form id="adminLoginForm" class="admin-login-form">
+      <label>Email administrateur
+        <input type="email" name="email" autocomplete="username" required placeholder="admin@kinvins.cd">
+      </label>
+      <label>Mot de passe
+        <input type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <button class="btn btn-gold full" id="adminLoginButton" type="submit">Se connecter</button>
+      <p class="admin-login-error" id="adminLoginError" role="alert"></p>
+    </form>
+
+    <div class="admin-login-links">
+      <a href="../index.html">← Retour au site</a>
+    </div>
+  </section>
+</main>
+<script src="login.js"></script>
+</body>
+</html>

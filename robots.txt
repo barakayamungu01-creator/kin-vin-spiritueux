@@ -2,3 +2,17 @@ User-agent: *
 Allow: /
 
 Sitemap: https://kinvins.cd/sitemap.xml
+
+Disallow: /admin/
+Disallow: /admin.html
+Disallow: /admin-products.html
+Disallow: /admin-product-new.html
+Disallow: /admin-blog.html
+Disallow: /admin-article-new.html
+Disallow: /admin-banners.html
+Disallow: /admin-banner-new.html
+Disallow: /admin-clients.html
+Disallow: /admin-client.html
+Disallow: /stock.html
+Disallow: /orders.html
+Disallow: /deliveries.html

@@ -1,0 +1,65 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Client — Admin KIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../assets/styles.css"><script src="config.js"></script><script src="admin-auth-guard.js"></script><link rel="stylesheet" href="assets/admin-auth.css"></head><body>
+<div class="topbar"><div class="container topbar-inner"><span>Administration KIN</span><span class="hide-mobile">Clients • Commandes • Catalogue</span><a href="../index.html">Voir le site</a></div></div>
+<header class="header"><div class="container nav"><a class="brand" href="../index.html"><span class="brand-mark">K</span><span class="brand-text"><strong>KIN</strong><small>VINS & SPIRITUEUX</small></span></a><nav id="navLinks"><a href="../index.html">Accueil</a><a href="../catalogue.html">Catalogue</a><a href="../blog.html">Journal</a><a class="active" href="admin.html">Admin</a><a href="#" id="adminLogoutBtn" class="admin-logout-link">Déconnexion</a></nav><div class="nav-actions"><button class="cart-btn" id="cartBtn">Panier <span class="cart-count">0</span></button><button class="menu-btn" id="menuBtn">☰</button></div></div></header>
+<main><section class="page-hero"><div class="container"><p class="eyebrow">ADMINISTRATION</p><h1>Fiche client</h1></div></section><section class="section"><div class="container admin-layout"><aside class="panel admin-sidebar"><a href="admin.html">Dashboard</a><a href="admin-products.html">Produits</a><a href="admin-blog.html">Blog / SEO</a><a href="admin-banners.html">Bannières</a><a class="active" href="admin-clients.html">Clients</a><a href="stock.html">Stock</a><a href="orders.html">Commandes</a><a href="deliveries.html">Livraisons</a><a href="../index.html">Voir la boutique</a></aside><div>
+<div class="client-actions-bar">
+ <div><a class="text-link" href="admin-clients.html">← Retour aux clients</a><h2 id="clientFormTitle" style="font-size:2.8rem;margin:8px 0 0">Nouveau client</h2></div>
+ <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-outline" id="archiveClientBtn">Désactiver</button><button type="button" class="btn btn-danger" id="deleteClientBtn">Supprimer</button></div>
+</div>
+
+<div id="clientSummary"></div>
+
+<form id="adminClientForm" style="margin-top:18px">
+ <div class="panel client-section">
+  <h3>Identité & statut</h3>
+  <div class="client-form-grid">
+    <label>Type de client<select name="type"><option value="individual">Particulier</option><option value="professional">Professionnel</option></select></label>
+    <label>Statut<select name="status"><option value="active">Actif</option><option value="pending">En attente</option><option value="inactive">Inactif</option><option value="blocked">Bloqué</option></select></label>
+  </div>
+  <div class="client-form-grid" id="individualFields" style="margin-top:14px">
+    <label>Prénom<input name="firstName"></label><label>Nom<input name="lastName"></label>
+  </div>
+  <div class="client-form-grid" id="professionalFields" style="margin-top:14px;display:none">
+    <label class="span2">Entreprise<input name="company"></label>
+    <label>Personne de contact<input name="contactPerson"></label>
+    <label>NIF / Identifiant fiscal<input name="taxId"></label>
+    <label>Offre Pro<select name="proOffer"><option value="">Aucune</option><option>Essentiel</option><option>Business</option><option>Premium</option></select></label>
+    <label>Limite de crédit USD<input name="creditLimit" type="number" min="0" step="1" value="0"></label>
+  </div>
+ </div>
+
+ <div class="panel client-section">
+  <h3>Coordonnées & livraison</h3>
+  <div class="client-form-grid">
+    <label>Email<input name="email" type="email" required></label>
+    <label>Téléphone<input name="phone" required placeholder="+243…"></label>
+    <label>Ville<input name="city" value="Kinshasa"></label>
+    <label>Commune<input name="commune"></label>
+    <label class="span2">Adresse<input name="address"></label>
+  </div>
+ </div>
+
+ <div class="panel client-section">
+  <h3>Données commerciales</h3>
+  <div class="client-form-grid">
+    <label>Date de création<input name="createdAt" type="date"></label>
+    <label>Dernière commande<input name="lastOrderAt" type="date"></label>
+    <label>Nombre de commandes<input name="ordersCount" type="number" min="0" value="0"></label>
+    <label>Dépenses cumulées USD<input name="totalSpent" type="number" min="0" step="0.01" value="0"></label>
+    <label>Points fidélité<input name="loyaltyPoints" type="number" min="0" value="0"></label>
+    <label>Tags<input name="tags" placeholder="VIP, Champagne, Grand compte"></label>
+    <label class="span2">Notes internes<textarea name="notes" placeholder="Préférences, consignes de livraison, suivi commercial…"></textarea></label>
+  </div>
+ </div>
+
+ <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px"><a class="btn btn-outline" href="admin-clients.html">Annuler</a><button class="btn btn-gold" id="clientSubmitLabel">Créer le client</button></div>
+</form>
+
+<div class="panel client-section" style="margin-top:22px">
+ <h3>Historique des commandes</h3>
+ <div class="table-wrap"><table class="data-table"><thead><tr><th>Commande</th><th>Date</th><th>Total</th><th>Statut</th></tr></thead><tbody id="clientOrders"><tr><td colspan="4" class="muted">Aucune commande.</td></tr></tbody></table></div>
+</div>
+</div></div></section></main>
+<footer><div class="container footer-bottom"><span>© 2026 KIN Vins & Spiritueux</span><a href="../index.html">Voir la boutique</a></div></footer>
+<div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cartDrawer"><div class="drawer-head"><div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div><button class="icon-btn" id="closeCart">✕</button></div><div class="cart-items" id="drawerItems"></div><div class="drawer-foot"><div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div><a class="btn btn-gold full" href="../cart.html">Voir le panier</a></div></aside><div class="toast" id="toast"></div><script src="../assets/app.js"></script></body></html>

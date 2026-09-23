@@ -117,3 +117,11 @@ En production, les comptes, rôles et données personnelles doivent être géré
 - Logo : **KIN VINS & SPIRITUEUX**
 - Domaine canonique : `https://kinvins.cd`
 - Email de contact : `contact@kinvins.cd`
+
+## Administration sécurisée
+- `/admin/login.html` : connexion administrateur.
+- `/admin/` : espace d'administration.
+- `ADMIN-SECURITY.md` : instructions détaillées.
+- `supabase/admin_security.sql` : schéma de rôles et règles RLS de départ.
+- Le lien Admin n'est plus affiché dans la navigation publique.
+- En production, l'administration reste verrouillée tant que Supabase n'est pas configuré.

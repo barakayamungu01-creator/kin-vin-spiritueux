@@ -7,15 +7,14 @@
  *   "supabase" -> authentification réelle avec Supabase
  */
 window.KINVINS_ADMIN_CONFIG = {
-  mode: "demo",
+  mode: "supabase",
 
-  // À remplir lorsque votre projet Supabase sera créé.
-  supabaseUrl: "",
-  supabaseAnonKey: "",
+  supabaseUrl: "https://vaioirwtomjtqloanorm.supabase.co",
 
-  allowedRoles: ["admin", "super_admin"],
+  supabaseAnonKey: "sb_publishable_LjFgDbPYdwujuoZdafMyUA_DY6dtOU1",
 
-  // Utilisé uniquement avec mode="demo" ET uniquement en local.
-  localDemoEmail: "admin@kinvins.cd",
-  localDemoPassword: "KIN-DEMO-LOCAL"
+  allowedRoles: [
+    "admin",
+    "super_admin"
+  ]
 };

@@ -1,0 +1,25 @@
+﻿order;sku;product;family;subcategory;image_count;duplicates_removed;folder
+1;FIO-PA-750;La Fiole du pape;vin;Vin rouge;6;0;FIO-PA-750
+2;FIO-PA-1500;La Fiole du pape;vin;Vin rouge;2;0;FIO-PA-1500
+3;RUIN-RUI-750;Champagne Ruinard;vin;champagne;4;0;RUIN-RUI-750
+4;HEN-PAR-700;Hennessy Paradis;cognac;;2;0;HEN-PAR-700
+5;HEN-XO-750;Hennessy XO;cognac;;2;0;HEN-XO-750
+6;HEN-HEN-750;Hennessy;cognac;;3;1;HEN-HEN-750
+7;CAM-SCO-750;Camus scotch;cognac;;3;0;CAM-SCO-750
+8;MAR-MAR-700;Martell;cognac;;2;0;MAR-MAR-700
+9;MAR-XO-700;Martell XO;cognac;;1;0;MAR-XO-700
+10;MAR-XXO-1000;Martell  XXO;cognac;;2;0;MAR-XXO-1000
+11;JHW-BLUE-750;Johnnie Walker Blue Label;whisky;;5;0;JHW-BLUE-750
+12;JHW-GOSHT-750;Johnnie Walker Blue Label ghost and rare;whisky;;2;0;JHW-GOSHT-750
+13;JHW-GOLD-750;Johnnie Walker Gold Label;whisky;;2;0;JHW-GOLD-750
+14;GLEN-12-750;Glenfiddich 12 ans;whisky;;2;0;GLEN-12-750
+15;GLEN-18-750;Glenfiddich 18 ans;whisky;;2;0;GLEN-18-750
+16;GLEN-15-750;Glenfiddich 15 ans;whisky;;2;0;GLEN-15-750
+17;MOET-BRUT-750;Champagne Moet;vin;champagne;2;0;MOET-BRUT-750
+18;VEUVE-BRUT-750;Champage Veuve Cliquot;vin;champagne;2;0;VEUVE-BRUT-750
+19;CHI-REG-1140;Chivas;whisky;;2;0;CHI-REG-1140
+20;MOU-CAD-750;Mouton cadet;Vin;Bordeaux;1;0;MOU-CAD-750
+21;POR-ROUGE-750;Vin Porto;Vin;vin rouge;1;0;POR-ROUGE-750
+22;ARM-BRUT-750;Champagne Arman de Brignac;Vin;Champagne;3;0;ARM-BRUT-750
+23;LPE-BRUT-750;Champagne Laurent perrier;vin;champagne;1;0;LPE-BRUT-750
+24;DOM-PER-750;Champagne Dom Perignon;vin;champagne;1;0;DOM-PER-750

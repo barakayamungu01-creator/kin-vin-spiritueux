@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Import produits — Admin KIN</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="assets/admin-auth.css">
+<link rel="stylesheet" href="assets/product-import.css">
+
+<script src="../assets/supabase-config.js"></script>
+<script src="config.js"></script>
+<script src="admin-auth-guard.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>Livraison à Kinshasa</span>
+    <span class="hide-mobile">Mobile Money • Visa • Mastercard</span>
+    <a href="../b2b.html">WhatsApp</a>
+  </div>
+</div>
+
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">K</span>
+      <span class="brand-text"><strong>KIN</strong><small>VINS & SPIRITUEUX</small></span>
+    </a>
+    <nav id="navLinks">
+      <a href="../index.html">Accueil</a>
+      <a href="../catalogue.html">Catalogue</a>
+      <a href="../blog.html">Journal</a>
+      <a href="../b2b.html">Professionnels</a>
+      <a href="../account.html">Compte</a>
+      <a class="active" href="admin.html">Admin</a>
+      <a href="#" id="adminLogoutBtn" class="admin-logout-link">Déconnexion</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="cart-btn" id="cartBtn">Panier <span class="cart-count">0</span></button>
+      <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">ADMINISTRATION • IMPORT AUTOMATIQUE</p>
+    <h1>Importer produits & photos</h1>
+    <p class="lead">
+      Importez un fichier CSV/Excel et un dossier d’images. Le SKU relie automatiquement
+      chaque produit à ses photos.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+<div class="container admin-layout">
+  <aside class="panel admin-sidebar">
+    <a href="admin.html">Dashboard</a>
+    <a href="admin-products.html">Produits</a>
+    <a class="active" href="admin-product-import.html">Import produits</a>
+    <a href="admin-blog.html">Blog / SEO</a>
+    <a href="admin-banners.html">Bannières</a>
+    <a href="admin-clients.html">Clients</a>
+    <a href="stock.html">Stock</a>
+    <a href="orders.html">Commandes</a>
+    <a href="deliveries.html">Livraisons</a>
+    <a href="../catalogue.html">Voir la boutique</a>
+  </aside>
+
+  <div class="import-main">
+    <div class="panel import-intro">
+      <div>
+        <p class="eyebrow">ÉTAPE 1</p>
+        <h2>Sources d’import</h2>
+        <p class="muted">
+          Utilisez <strong>SKU</strong> comme identifiant stable. Exemple :
+          <code>HEN-XO-700</code> ↔ <code>HEN-XO-700.jpg</code>,
+          <code>HEN-XO-700_2.jpg</code>.
+        </p>
+      </div>
+      <a class="btn btn-outline" href="../data/product_import_template.csv" download>Télécharger le modèle CSV</a>
+    </div>
+
+    <div class="import-grid">
+      <div class="panel import-card">
+        <span class="import-step">01</span>
+        <h3>Fichier produits</h3>
+        <p class="muted">CSV, XLS ou XLSX.</p>
+        <label class="import-drop">
+          <input id="productFile" type="file" accept=".csv,.xls,.xlsx,.xlsm,.ods">
+          <strong>Sélectionner le fichier</strong>
+          <span id="productFileName">Aucun fichier choisi</span>
+        </label>
+      </div>
+
+      <div class="panel import-card">
+        <span class="import-step">02</span>
+        <h3>Dossier photos</h3>
+        <p class="muted">JPG, PNG ou WebP. Maximum 5 Mo par photo.</p>
+        <label class="import-drop">
+          <input id="photoFolder" type="file" webkitdirectory directory multiple accept="image/jpeg,image/png,image/webp">
+          <strong>Sélectionner le dossier</strong>
+          <span id="photoFolderName">Aucun dossier choisi</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="panel import-options">
+      <div>
+        <p class="eyebrow">ÉTAPE 2</p>
+        <h2>Options</h2>
+      </div>
+      <div class="option-grid">
+        <label class="check-row">
+          <input id="updateExisting" type="checkbox" checked>
+          <span><strong>Mettre à jour les SKU existants</strong><small>Prix, stock, texte et photos seront actualisés.</small></span>
+        </label>
+        <label class="check-row">
+          <input id="replacePhotos" type="checkbox" checked>
+          <span><strong>Remplacer la galerie du produit</strong><small>Les références `product_images` précédentes seront remplacées.</small></span>
+        </label>
+        <label class="check-row">
+          <input id="requirePhoto" type="checkbox">
+          <span><strong>Exiger au moins une photo</strong><small>Les lignes sans image correspondante seront ignorées.</small></span>
+        </label>
+        <label class="check-row">
+          <input id="skipInactive" type="checkbox">
+          <span><strong>Ignorer les produits inactifs</strong><small>Les lignes avec actif=false ne seront pas importées.</small></span>
+        </label>
+      </div>
+      <div class="import-actions">
+        <button class="btn btn-gold" id="analyzeImportBtn">Analyser l’import</button>
+        <button class="btn btn-outline" id="clearImportBtn">Effacer</button>
+      </div>
+    </div>
+
+    <div id="importAnalysis" class="hidden">
+      <div class="panel import-summary">
+        <div>
+          <p class="eyebrow">ÉTAPE 3</p>
+          <h2>Prévisualisation</h2>
+        </div>
+        <div class="import-kpis">
+          <div><strong id="kpiRows">0</strong><span>Lignes</span></div>
+          <div><strong id="kpiReady">0</strong><span>Prêtes</span></div>
+          <div><strong id="kpiPhotos">0</strong><span>Avec photos</span></div>
+          <div><strong id="kpiErrors">0</strong><span>Erreurs</span></div>
+        </div>
+      </div>
+
+      <div class="panel" style="padding:20px">
+        <div class="table-wrap import-table-wrap">
+          <table class="data-table import-preview-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>SKU</th>
+                <th>Produit</th>
+                <th>Catégorie</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th>Photos</th>
+                <th>Validation</th>
+              </tr>
+            </thead>
+            <tbody id="importPreviewBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel import-run-panel">
+        <div>
+          <h3>Prêt à importer</h3>
+          <p class="muted" id="importReadyText"></p>
+        </div>
+        <button class="btn btn-gold" id="runImportBtn">Importer dans Supabase</button>
+      </div>
+    </div>
+
+    <div id="importProgressBox" class="panel import-progress-box hidden">
+      <div class="progress-head">
+        <div>
+          <p class="eyebrow">IMPORT EN COURS</p>
+          <h3 id="progressTitle">Préparation…</h3>
+        </div>
+        <strong id="progressPercent">0%</strong>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      <p class="muted" id="progressDetail"></p>
+      <div class="import-log" id="importLog"></div>
+    </div>
+
+    <div id="importResult" class="panel import-result hidden">
+      <p class="eyebrow">TERMINÉ</p>
+      <h2>Résultat de l’import</h2>
+      <div class="result-grid">
+        <div><strong id="resultProducts">0</strong><span>Produits traités</span></div>
+        <div><strong id="resultCreatedUpdated">0</strong><span>Créés / mis à jour</span></div>
+        <div><strong id="resultPhotos">0</strong><span>Photos envoyées</span></div>
+        <div><strong id="resultFailed">0</strong><span>Échecs</span></div>
+      </div>
+      <div class="import-actions">
+        <a class="btn btn-gold" href="admin-products.html">Voir les produits</a>
+        <a class="btn btn-outline" href="../catalogue.html">Voir le catalogue</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-bottom">
+    <span>© 2026 KIN Vins & Spiritueux</span>
+    <a href="../catalogue.html">Voir la boutique</a>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div>
+    <button class="icon-btn" id="closeCart">✕</button>
+  </div>
+  <div class="cart-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div>
+    <a class="btn btn-gold full" href="../cart.html">Voir le panier</a>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script src="../assets/app.js"></script>
+<script src="../assets/supabase-products.js"></script>
+<script src="product-import.js"></script>
+</body>
+</html>

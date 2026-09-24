@@ -125,3 +125,9 @@ En production, les comptes, rôles et données personnelles doivent être géré
 - `supabase/admin_security.sql` : schéma de rôles et règles RLS de départ.
 - Le lien Admin n'est plus affiché dans la navigation publique.
 - En production, l'administration reste verrouillée tant que Supabase n'est pas configuré.
+
+## Import automatique produits + photos
+- `admin/admin-product-import.html` : import CSV/Excel et dossier photos.
+- `supabase/product_import_storage_phase3.sql` : galerie, bucket Storage et politiques RLS.
+- `data/product_import_template.csv` : modèle d'import.
+- Matching automatique des photos par SKU et upsert sans doublon.

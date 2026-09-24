@@ -1,0 +1,3 @@
+﻿sku,name,brand,category,subcategory,origin,volume,abv,price,promo_price,stock,badge,description,active,featured,image_url
+HEN-XO-700,Hennessy XO,Hennessy,Cognacs,XO,France,70 cl,40%,220,199,12,Premium,Cognac XO premium,true,true,
+RUIN-BRUT-750,Ruinart Brut,Ruinart,Champagnes,Brut,France,75 cl,12%,95,,15,Best seller,Champagne brut premium,true,true,

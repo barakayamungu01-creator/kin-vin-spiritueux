@@ -1,0 +1,57 @@
+﻿sku;product;original_path;new_path;status;sha256
+FIO-PA-750;La Fiole du pape;la-fiole-du-pape-75-cl/la-fiole-du-pape-75-cl-01-136d1e24db.jpg;FIO-PA-750/FIO-PA-750-01.jpg;kept;3e0710553b30aa86eba845d323c9e544dfada689ee7404cccc35d2e0c86d98ee
+FIO-PA-750;La Fiole du pape;la-fiole-du-pape-75-cl/la-fiole-du-pape-75-cl-02-602840bf08.jpg;FIO-PA-750/FIO-PA-750-02.jpg;kept;3cc0bbda0bb99d4189b4157192927d7ebec33859bef031990c565d855d247b9b
+FIO-PA-750;La Fiole du pape;la-fiole-du-pape-75-cl/la-fiole-du-pape-75-cl-03-6975cd8b52.png;FIO-PA-750/FIO-PA-750-03.png;kept;62aed1fa34c51bf622b1bc2117bc5911d60949236c5407cf8a2a67d140bcf9d2
+FIO-PA-750;La Fiole du pape;la-fiole-du-pape-75-cl/la-fiole-du-pape-75-cl-04-a8db108d24.png;FIO-PA-750/FIO-PA-750-04.png;kept;b2b0249532bbb67070a40ef23e29bcf14d6d36b9336a2ef947899861d36f74eb
+FIO-PA-750;La Fiole du pape;la-fiole-du-pape-75-cl/la-fiole-du-pape-75-cl-05-4e7b920fda.jpg;FIO-PA-750/FIO-PA-750-05.jpg;kept;24fa89964e62aa73d3dc8a9825fdfb7a08100cca1ecf9283016cde4dc9f2143f
+FIO-PA-750;La Fiole du pape;la-fiole-du-pape-75-cl/LA-FOILE-DU-PAPE-CHATEAUNEUF-DU-PAPE-75CL-2.webp;FIO-PA-750/FIO-PA-750-06.webp;kept;3a47d2e65bfd777092fcef69bc3ca49fba78d035f8b3326ac23721633de60aa8
+FIO-PA-1500;La Fiole du pape;la-fiole-du-pape-1-5-l/la-fiole-du-pape-75-cl-01-136d1e24db.jpg;FIO-PA-1500/FIO-PA-1500-01.jpg;kept;3e0710553b30aa86eba845d323c9e544dfada689ee7404cccc35d2e0c86d98ee
+FIO-PA-1500;La Fiole du pape;la-fiole-du-pape-1-5-l/vin-maison-brotte-la-fiole-du-pape-rouge-etui.jpg;FIO-PA-1500/FIO-PA-1500-02.jpg;kept;b57242b06ca7a9c6252804c77ddee8ec010b8f8f5c6a24639b4f88bbda48e907
+RUIN-RUI-750;Champagne Ruinard;champagne-ruinard/champagne-ruinard-01-9ddf858b3e.png;RUIN-RUI-750/RUIN-RUI-750-01.png;kept;625903e08df7d90aa1a6e20bd45181614a7185e64602405f66806d95294cab13
+RUIN-RUI-750;Champagne Ruinard;champagne-ruinard/dsrC9WNFQMW92k1ctpXVFA_pb_x600_0483bbe5-89df-419f-8039-3c7efdf1caaf.webp;RUIN-RUI-750/RUIN-RUI-750-02.webp;kept;0b54408272d0ae27180e584adbd41d5c9ca9f79bdf0d1e43fdc914a5210e0944
+RUIN-RUI-750;Champagne Ruinard;champagne-ruinard/mainProductPicture-ProductDetailsPage-ConversionMediaFormat-null.png;RUIN-RUI-750/RUIN-RUI-750-03.png;kept;ddb8b60b08ff2c678c140a800523ed979e1713e409752581fd6b5dd3597878a2
+RUIN-RUI-750;Champagne Ruinard;champagne-ruinard/ruinart-blanc-de-blancs.webp;RUIN-RUI-750/RUIN-RUI-750-04.webp;kept;046d2671df2207833c7b04d14bda85f8359a475a9d40ec5a343b6ef97a4a2cdd
+HEN-PAR-700;Hennessy Paradis;hennessy-paradis/838644_ece819f9-fcc2-4627-aff7-e88ee10238fb.webp;HEN-PAR-700/HEN-PAR-700-01.webp;kept;19fa29988c18f558fa6a995cf05aaf1cb0e7b5aa5d6ca2c808034852b551649d
+HEN-PAR-700;Hennessy Paradis;hennessy-paradis/Hennessy-Paradis_5000x.webp;HEN-PAR-700/HEN-PAR-700-02.webp;kept;f6380f7f041955ae1ad388d02a858191ec99aed0ccc1fc4792680d21347e36ae
+HEN-XO-750;Hennessy XO;hennessy-xo/2212_xo_bottle-pack_ok_2000x2000.jpg;HEN-XO-750/HEN-XO-750-01.jpg;kept;c39fe0db791a5fb313376f90cfcb5bf9e380132afe91e777f5b5223332504af5
+HEN-XO-750;Hennessy XO;hennessy-xo/2212_xo_bottle_front_2000x2000.jpg;HEN-XO-750/HEN-XO-750-02.jpg;kept;3a1f9069fd91f7a6b1aaa075b2e7dd367befd544aef041af24d62cef1c1947a8
+HEN-HEN-750;Hennessy;Hennessy 1.webp;HEN-HEN-750/HEN-HEN-750-01.webp;kept;102e5234eb0bc47357ad18cd3e7d31ea9ff64a41f916c64a941dbdc6a61e78f5
+HEN-HEN-750;Hennessy;Hennessy 2.webp;;duplicate_removed;102e5234eb0bc47357ad18cd3e7d31ea9ff64a41f916c64a941dbdc6a61e78f5
+HEN-HEN-750;Hennessy;hennessy/8284-1_1736438891.webp;HEN-HEN-750/HEN-HEN-750-02.webp;kept;1d405fd445c2e3b298761c44e4eb3fa6c8dd6480425e7deeb8d2ddb9f80834ce
+HEN-HEN-750;Hennessy;hennessy/NGF_Hennessy-Promo-packshot-for-website-02.webp;HEN-HEN-750/HEN-HEN-750-03.webp;kept;4935bfd1a957915027ff1c52a562891419d0f86b281c9506c6d99f358ff72df6
+CAM-SCO-750;Camus scotch;camus-scotch/camus__vsop-borderies.jpg;CAM-SCO-750/CAM-SCO-750-01.jpg;kept;5244b8bb22c6a73683398b4c47efac8cf56b7752fccbb7cc27a787173e5e6031
+CAM-SCO-750;Camus scotch;camus-scotch/images.jpg;CAM-SCO-750/CAM-SCO-750-02.jpg;kept;23aed4bcd6a83c637cb4a208fc8920fc399b6c96cdec6c16630c964312a413ef
+CAM-SCO-750;Camus scotch;camus-scotch/lp15933_2_1.webp;CAM-SCO-750/CAM-SCO-750-03.webp;kept;1c1a5577b56286c8d0948650776c4955ff7f408747ac0dfbcf7789a9002f51a5
+MAR-MAR-700;Martell;martell/92xEUfRHKAV9-tquQDDaWR.webp;MAR-MAR-700/MAR-MAR-700-01.webp;kept;6a66314426a4e66dc628daea980b0a67f3a8989df0367097c8922ad94cf76a42
+MAR-MAR-700;Martell;martell/VS_sequence_0071-700x700.avif;MAR-MAR-700/MAR-MAR-700-02.avif;kept;08281991c04536c50876e21f66aab63591b700c66ffcc6d743054d0b513e98f5
+MAR-XO-700;Martell XO;Martell xo.jpg;MAR-XO-700/MAR-XO-700-01.jpg;kept;4604c026a0ffba01d5a025983c2b534251abd1a591148dedab99e9b6775ae0ea
+MAR-XXO-1000;Martell  XXO;Martell  XXO 1.jpg;MAR-XXO-1000/MAR-XXO-1000-01.jpg;kept;eefb8a322cef5486be2d1d9187e68048e98258fd3138bd56f16c68e7b37dd059
+MAR-XXO-1000;Martell  XXO;Martell  XXO.jpg;MAR-XXO-1000/MAR-XXO-1000-02.jpg;kept;38c4e7b7f568c66d7501509b4e17f3e51d95043d36ad2464a6afd499b69dd8ef
+JHW-BLUE-750;Johnnie Walker Blue Label;Blue Label.jpg;JHW-BLUE-750/JHW-BLUE-750-01.jpg;kept;f70ae7c643facc15b7490188eefa10bcc691f9d9cd6098ff4b68bf566b11a3c2
+JHW-BLUE-750;Johnnie Walker Blue Label;Blue Label.webp;JHW-BLUE-750/JHW-BLUE-750-02.webp;kept;8203bc22b19d92880a1e244e2c96e5461ed76092d141460dab5e93cc2eb7da01
+JHW-BLUE-750;Johnnie Walker Blue Label;Johnnie Walker Blue Label 2.webp;JHW-BLUE-750/JHW-BLUE-750-03.webp;kept;9489c786bccab9cde71c998c6c93659a531492e944e1312a156a97439be3ab0f
+JHW-BLUE-750;Johnnie Walker Blue Label;Johnnie Walker Blue Label 3.webp;JHW-BLUE-750/JHW-BLUE-750-04.webp;kept;b2c8f2156447482251ad4a144beca2d30a16427f74b08e9c6e38fb0be2d33bc7
+JHW-BLUE-750;Johnnie Walker Blue Label;Johnnie Walker Blue Label.webp;JHW-BLUE-750/JHW-BLUE-750-05.webp;kept;a917f7bb80bd38fd4744649ca1770d4a792608b8a5cea53b4aaf236f7684506a
+JHW-GOSHT-750;Johnnie Walker Blue Label ghost and rare;Blue Label  ghost and rare.jpg;JHW-GOSHT-750/JHW-GOSHT-750-01.jpg;kept;290fb443da1c20cc30e6cbf571128651afac482836a60d6f1e2f5574dba99e68
+JHW-GOSHT-750;Johnnie Walker Blue Label ghost and rare;Blue Label  ghost and rare.webp;JHW-GOSHT-750/JHW-GOSHT-750-02.webp;kept;543a4fd5d7a2f6192c6ac35e6ba58ca57406451bab3a69585d2975210d5813d4
+JHW-GOLD-750;Johnnie Walker Gold Label;Gold Label.jpg;JHW-GOLD-750/JHW-GOLD-750-01.jpg;kept;7001b0fa0ed5a6b0073e4bac0bda04153fb8b14732c85a9518ddd3990c1bfa5c
+JHW-GOLD-750;Johnnie Walker Gold Label;Gold Label.webp;JHW-GOLD-750/JHW-GOLD-750-02.webp;kept;8a5de8ddf125dd625611876b93ab288d1603dba159ea157b5cb66515a47ddf9b
+GLEN-12-750;Glenfiddich 12 ans;Glenfiddich 12 ans 1.jpg;GLEN-12-750/GLEN-12-750-01.jpg;kept;94a03f200a8f148b483325c6d2eb234067e1f2060e19a347dbccde883e3e7760
+GLEN-12-750;Glenfiddich 12 ans;Glenfiddich 12 ans.jpg;GLEN-12-750/GLEN-12-750-02.jpg;kept;13017d2613be6c086fd46a436b83f847c8f596f61f8d6d84ae364eaeeb9eddd4
+GLEN-18-750;Glenfiddich 18 ans;Glenfiddich 18 ans 1.jpg;GLEN-18-750/GLEN-18-750-01.jpg;kept;afc5080b28efedfe146f92bacaa558e25a8def1f237e30895b28424a284e3b94
+GLEN-18-750;Glenfiddich 18 ans;Glenfiddich 18 ans.webp;GLEN-18-750/GLEN-18-750-02.webp;kept;0ea28139156dba6f776f1d28dc1f3dd84a067a8eab270773c08d51b7fbcb9500
+GLEN-15-750;Glenfiddich 15 ans;Glenfiddich 15 ans 1.jpg;GLEN-15-750/GLEN-15-750-01.jpg;kept;fe0cb55377406d4c5c01b615d3b2a23656d3f4c2f1a8a9d459ed0db87b793d3b
+GLEN-15-750;Glenfiddich 15 ans;Glenfiddich 15 ans.jpg;GLEN-15-750/GLEN-15-750-02.jpg;kept;92fb24d9a484647bb2d8a3c8c2f11d63f58fd9e4a01ad98df7f0a332e4dba744
+MOET-BRUT-750;Champagne Moet;Champagne Moet 1.webp;MOET-BRUT-750/MOET-BRUT-750-01.webp;kept;2152a3a83ae62e110144cc7955aa1e7cfe2a789ef6487f4c53775ee0f9f7b5ab
+MOET-BRUT-750;Champagne Moet;Champagne Moet.png;MOET-BRUT-750/MOET-BRUT-750-02.png;kept;eaf8ec7bb150323d66ae231df4ad38785fdf5ea84d1685af15b1c3d428f09b16
+VEUVE-BRUT-750;Champage Veuve Cliquot;Champagne Veuve Cliquot.jpg;VEUVE-BRUT-750/VEUVE-BRUT-750-01.jpg;kept;a94152510805bc52ded27bb3cd479b5d67acb37f7d8384d7dbf9040fb0db3b4a
+VEUVE-BRUT-750;Champage Veuve Cliquot;Champagne Veuve Cliquot.webp;VEUVE-BRUT-750/VEUVE-BRUT-750-02.webp;kept;ae0ed75dba4a8ab761f252fbae2bc177db439f0f9ad674550b984372e74b76ce
+CHI-REG-1140;Chivas;Chivas 1.webp;CHI-REG-1140/CHI-REG-1140-01.webp;kept;98a028ec7fb58cc5b07aa3f8683d0f37095cf81887fb1ccef023a11d20a80b04
+CHI-REG-1140;Chivas;Chivas.jpg;CHI-REG-1140/CHI-REG-1140-02.jpg;kept;997f7b5c2c58d91a67603b7ad49b5d45392fffdcc90cb76b77e1ad90e1585bce
+MOU-CAD-750;Mouton cadet;Mouton cadet.jpg;MOU-CAD-750/MOU-CAD-750-01.jpg;kept;a412c8846cdb48b27ee064ec8a120c7150ecc31dc63132b01a29d62821156a33
+POR-ROUGE-750;Vin Porto;Vin Porto.png;POR-ROUGE-750/POR-ROUGE-750-01.png;kept;9099cdcfd4541f0bb4cbb0c1b540d7f41d56cbabd0a356fb1808de0c1ba9f977
+ARM-BRUT-750;Champagne Arman de Brignac;Champagne Arman de Brignac 1.jpg;ARM-BRUT-750/ARM-BRUT-750-01.jpg;kept;9170faf7aa6ca5cb3146943dea623736504176b9651c71ace2912f24a08b9818
+ARM-BRUT-750;Champagne Arman de Brignac;Champagne Arman de Brignac 2.jpg;ARM-BRUT-750/ARM-BRUT-750-02.jpg;kept;78e958902204452e4d8000925fd20ef6031cc9d3425dc4742aa47baa75f0c482
+ARM-BRUT-750;Champagne Arman de Brignac;Champagne Arman de Brignac.jpg;ARM-BRUT-750/ARM-BRUT-750-03.jpg;kept;2c1e394b96793667881ca48ffaa6b315862fafadeeba349ae91310d76a88cbcf
+LPE-BRUT-750;Champagne Laurent perrier;Champagne Laurent perrier.jpg;LPE-BRUT-750/LPE-BRUT-750-01.jpg;kept;330473fae421e35f0e8984408e12ff4e5db2c5419118c2fbcb05348bc9100afa
+DOM-PER-750;Champagne Dom Perignon;Champagne Don perignon.jpg;DOM-PER-750/DOM-PER-750-01.jpg;kept;8c7ec53719b6337ab3e6015147cd045c5bc59231e97470fb42ccde858612de5f

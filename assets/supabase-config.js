@@ -3,6 +3,6 @@
  * Utiliser uniquement Project URL + Publishable key.
  */
 window.KINVINS_SUPABASE_CONFIG = {
-  url: "https://VOTRE-PROJET.supabase.co",
-  publishableKey: "sb_publishable_VOTRE_CLE"
+  url: "https://vaioirwtomjtqloanorm.supabase.co",
+  publishableKey: "sb_publishable_LjFgDbPYdwujuoZdafMyUA_DY6dtOU1"
 };

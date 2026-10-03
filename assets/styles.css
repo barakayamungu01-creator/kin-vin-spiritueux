@@ -161,3 +161,20 @@ footer{padding:60px 0 28px}.footer-grid{display:grid;grid-template-columns:2fr r
 .client-actions-bar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
 .client-type-badge{display:inline-block;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--gold2);font-size:.76rem}
 @media(max-width:680px){.client-form-grid{grid-template-columns:1fr}.client-form-grid .span2{grid-column:auto}}
+
+
+/* Phase 4 — upload image produit Supabase + fallback image cassée */
+.product-image-wrap{position:relative}
+.image-fallback-bottle{display:none;width:72px;height:176px;place-items:center;border-radius:13px 13px 20px 20px;box-shadow:0 24px 45px rgba(0,0,0,.35);color:var(--ivory);position:relative}
+.image-fallback-bottle:before{content:"";position:absolute;top:-55px;width:28px;height:61px;border-radius:7px;background:inherit}
+.image-fallback-bottle span{width:58px;min-height:66px;padding:8px 4px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);font:500 .9rem "Cormorant Garamond";text-align:center}
+.detail-bottle.product-image-wrap .image-fallback-bottle{width:130px;height:340px;border-radius:18px 18px 28px 28px}
+.detail-bottle.product-image-wrap .image-fallback-bottle:before{display:block;top:-100px;width:42px;height:110px}
+.detail-bottle.product-image-wrap .image-fallback-bottle span{width:78%;min-height:auto;padding:34px 8px;font:600 1.35rem "Cormorant Garamond"}
+.image-upload-status{min-height:20px;margin:0}
+.image-upload-status.ready{color:var(--gold2)}
+.image-upload-status.loading{color:#d7c59e}
+.image-upload-status.ok{color:#9fd6ae}
+.image-upload-status.warn{color:#e5c986}
+.image-upload-status.bad{color:#e9a3a3}
+.preview-image-error{place-items:center;width:100%;height:100%;color:var(--muted)}

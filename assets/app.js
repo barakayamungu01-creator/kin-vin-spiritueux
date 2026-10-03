@@ -32,8 +32,9 @@ function addToCart(id,qty=1){state.cart[id]=(state.cart[id]||0)+qty;saveCart();t
 function setQty(id,qty){if(qty<=0)delete state.cart[id];else state.cart[id]=qty;saveCart()}
 function updateCartBadge(){$$(".cart-count").forEach(el=>el.textContent=cartCount())}
 function bottleHTML(p, cls="mini-bottle"){
+ const fallback=`<div class="image-fallback-bottle" style="background:linear-gradient(90deg,#17110f,${p.tone||"#5c1e26"},#15100e)"><span>${p.name.split(" ").slice(0,2).join("<br>")}</span></div>`;
  if(p.image){
-   return `<div class="${cls} product-image-wrap"><img class="product-photo" src="${p.image}" alt="${p.name}"></div>`;
+   return `<div class="${cls} product-image-wrap"><img class="product-photo" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">${fallback}</div>`;
  }
  return `<div class="${cls}" style="background:linear-gradient(90deg,#17110f,${p.tone||"#5c1e26"},#15100e)"><span>${p.name.split(" ").slice(0,2).join("<br>")}</span></div>`;
 }

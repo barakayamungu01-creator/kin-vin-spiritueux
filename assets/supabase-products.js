@@ -155,6 +155,119 @@
     }
   };
 
+
+  const PRODUCT_BUCKET = "product-images";
+  const MAX_SINGLE_IMAGE_BYTES = 5 * 1024 * 1024;
+  const ALLOWED_SINGLE_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+
+  function currentAdminToken() {
+    try {
+      const session = JSON.parse(sessionStorage.getItem("kinvins_admin_session") || "null");
+      return session?.accessToken || "";
+    } catch {
+      return "";
+    }
+  }
+
+  function safeSegment(value) {
+    return String(value || "")
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .trim().toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-+/g, "-") || "produit";
+  }
+
+  function fileExtension(file) {
+    const byName = (file?.name?.split(".").pop() || "").toLowerCase();
+    if (["jpg","jpeg","png","webp"].includes(byName)) return byName === "jpeg" ? "jpg" : byName;
+    if (file?.type === "image/png") return "png";
+    if (file?.type === "image/webp") return "webp";
+    return "jpg";
+  }
+
+  function encodeStoragePath(path) {
+    return String(path).split("/").map(encodeURIComponent).join("/");
+  }
+
+  function publicStorageUrl(path) {
+    return `${cfg.url}/storage/v1/object/public/${PRODUCT_BUCKET}/${encodeStoragePath(path)}`;
+  }
+
+  async function uploadProductImageFile(file, product) {
+    if (!configured()) throw new Error("Supabase n'est pas configuré.");
+    if (!file) throw new Error("Aucun fichier image sélectionné.");
+    if (!ALLOWED_SINGLE_IMAGE_TYPES.has(file.type) && !/\.(jpe?g|png|webp)$/i.test(file.name || "")) {
+      throw new Error("Format image non pris en charge. Utilisez JPG, PNG ou WebP.");
+    }
+    if (file.size > MAX_SINGLE_IMAGE_BYTES) throw new Error("L'image dépasse 5 Mo.");
+
+    const token = currentAdminToken();
+    if (!token) throw new Error("Session administrateur expirée. Reconnectez-vous.");
+
+    const folder = safeSegment(product?.sku || `product-${product?.id || "new"}`);
+    const stamp = Date.now();
+    const ext = fileExtension(file);
+    const path = `${folder}/main-${stamp}.${ext}`;
+
+    const response = await fetch(
+      `${cfg.url}/storage/v1/object/${PRODUCT_BUCKET}/${encodeStoragePath(path)}`,
+      {
+        method: "POST",
+        headers: {
+          apikey: cfg.publishableKey,
+          Authorization: `Bearer ${token}`,
+          "Content-Type": file.type || "application/octet-stream",
+          "cache-control": "3600"
+        },
+        body: file
+      }
+    );
+
+    if (!response.ok) {
+      let message = `${response.status} ${response.statusText}`;
+      try {
+        const body = await response.json();
+        message = body.message || body.error || body.error_description || message;
+      } catch {}
+      if (response.status === 404) {
+        message = "Bucket product-images introuvable. Exécutez d'abord le SQL Supabase Produits + Images.";
+      } else if (response.status === 403) {
+        message = "Upload refusé par Supabase Storage. Vérifiez les politiques RLS du bucket product-images et votre rôle admin.";
+      }
+      throw new Error(message);
+    }
+
+    return { path, url: publicStorageUrl(path) };
+  }
+
+  async function syncPrimaryImageRow(productId, uploaded, productName) {
+    if (!productId || !uploaded?.url) return;
+    try {
+      await api(`product_images?product_id=eq.${encodeURIComponent(productId)}`, {
+        method: "DELETE",
+        admin: true,
+        prefer: "return=minimal"
+      });
+
+      await api("product_images", {
+        method: "POST",
+        admin: true,
+        prefer: "return=minimal",
+        body: [{
+          product_id: productId,
+          storage_path: uploaded.path,
+          public_url: uploaded.url,
+          position: 1,
+          is_primary: true,
+          alt_text: productName ? `${productName} - photo principale` : "Photo principale"
+        }]
+      });
+    } catch (err) {
+      console.warn("Synchronisation product_images impossible :", err);
+    }
+  }
+
   window.KinSupabaseProducts = ProductsAPI;
 
   async function refreshPublicProducts() {
@@ -278,6 +391,10 @@
       const submit = $("#productSubmitLabel");
       const preview = $("#productImagePreview");
       const imageData = $("#productImageData");
+      const uploadStatus = $("#productImageUploadStatus");
+
+      let selectedImageFile = null;
+      let removeCurrentImage = false;
 
       if (existing) {
         if (title) title.textContent = `Modifier ${existing.name}`;
@@ -300,53 +417,76 @@
         if (imageData) imageData.value = existing.image || "";
       }
 
+      function setStatus(message, state = "") {
+        if (!uploadStatus) return;
+        uploadStatus.textContent = message || "";
+        uploadStatus.className = `small image-upload-status ${state}`.trim();
+      }
+
       function showPreview(src) {
         if (!preview) return;
         preview.innerHTML = src
-          ? `<img src="${src}" alt="Aperçu produit">`
+          ? `<img src="${src}" alt="Aperçu produit" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="preview-image-error" style="display:none">Image inaccessible</span>`
           : `<span>Aucune image</span>`;
       }
 
       showPreview(existing?.image || "");
 
       form.elements.imageUrl.oninput = e => {
-        if (e.target.value.trim()) {
-          imageData.value = e.target.value.trim();
-          showPreview(imageData.value);
-        }
+        const value = e.target.value.trim();
+        selectedImageFile = null;
+        removeCurrentImage = false;
+        form.elements.imageFile.value = "";
+        imageData.value = value;
+        showPreview(value);
+        setStatus(value ? "URL externe sélectionnée." : "");
       };
 
       form.elements.imageFile.onchange = e => {
         const file = e.target.files?.[0];
+        selectedImageFile = null;
         if (!file) return;
 
+        if (!ALLOWED_SINGLE_IMAGE_TYPES.has(file.type) && !/\.(jpe?g|png|webp)$/i.test(file.name || "")) {
+          toast("Utilisez une image JPG, PNG ou WebP.");
+          e.target.value = "";
+          return;
+        }
+
+        if (file.size > MAX_SINGLE_IMAGE_BYTES) {
+          toast("Image trop lourde : maximum 5 Mo.");
+          e.target.value = "";
+          return;
+        }
+
+        selectedImageFile = file;
+        removeCurrentImage = false;
+        form.elements.imageUrl.value = "";
+
+        const previewUrl = URL.createObjectURL(file);
+        showPreview(previewUrl);
+
         if (configured()) {
-          toast("Utilisez une URL d'image pour cette phase. Supabase Storage sera ajouté ensuite.");
-          e.target.value = "";
-          return;
+          imageData.value = existing?.image || "";
+          setStatus(`${file.name} sera envoyé dans Supabase Storage lors de l'enregistrement.`, "ready");
+        } else {
+          const reader = new FileReader();
+          reader.onload = () => { imageData.value = reader.result; };
+          reader.readAsDataURL(file);
+          setStatus(`${file.name} sera enregistré localement dans le navigateur.`, "ready");
         }
-
-        if (file.size > 450000) {
-          toast("Image trop lourde pour le mode local (max ~450 Ko)");
-          e.target.value = "";
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = () => {
-          imageData.value = reader.result;
-          showPreview(reader.result);
-        };
-        reader.readAsDataURL(file);
       };
 
       const remove = $("#removeProductImage");
       if (remove) {
         remove.onclick = () => {
+          selectedImageFile = null;
+          removeCurrentImage = true;
           imageData.value = "";
           form.elements.imageUrl.value = "";
           form.elements.imageFile.value = "";
           showPreview("");
+          setStatus("L'image sera retirée du produit à l'enregistrement.", "warn");
         };
       }
 
@@ -370,19 +510,49 @@
           promoPrice: Number(data.promoPrice || 0),
           stock: Number(data.stock || 0),
           description: data.description.trim(),
-          image: data.imageData || "",
+          image: removeCurrentImage ? "" : (data.imageData || existing?.image || ""),
           active: form.elements.active.checked,
           featured: form.elements.featured.checked
         };
 
         const submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) submitBtn.disabled = true;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.dataset.originalText = submitBtn.textContent;
+          submitBtn.textContent = selectedImageFile && configured() ? "Envoi de l’image…" : "Enregistrement…";
+        }
 
         try {
           if (configured()) {
-            const saved = existing
+            let saved = existing
               ? await ProductsAPI.update(existing.id, item)
               : await ProductsAPI.create(item);
+
+            if (selectedImageFile) {
+              setStatus("Upload vers Supabase Storage…", "loading");
+              const uploaded = await uploadProductImageFile(selectedImageFile, saved);
+              item.image = uploaded.url;
+
+              saved = await ProductsAPI.update(saved.id, {
+                ...saved,
+                ...item,
+                image: uploaded.url
+              });
+
+              await syncPrimaryImageRow(saved.id, uploaded, saved.name);
+              setStatus("Image envoyée et liée au produit.", "ok");
+            } else if (removeCurrentImage) {
+              saved = await ProductsAPI.update(saved.id, { ...saved, ...item, image: "" });
+              try {
+                await api(`product_images?product_id=eq.${encodeURIComponent(saved.id)}`, {
+                  method: "DELETE",
+                  admin: true,
+                  prefer: "return=minimal"
+                });
+              } catch (err) {
+                console.warn("Nettoyage product_images impossible :", err);
+              }
+            }
 
             if (existing) {
               PRODUCTS = PRODUCTS.map(p => p.id === existing.id ? saved : p);
@@ -395,20 +565,21 @@
               id: existing?.id || Math.max(0, ...PRODUCTS.map(p => Number(p.id) || 0)) + 1
             };
 
-            if (existing) {
-              PRODUCTS = PRODUCTS.map(p => p.id === existing.id ? localItem : p);
-            } else {
-              PRODUCTS.push(localItem);
-            }
+            if (existing) PRODUCTS = PRODUCTS.map(p => p.id === existing.id ? localItem : p);
+            else PRODUCTS.push(localItem);
 
             saveProducts();
           }
 
           toast(existing ? "Produit modifié" : "Produit ajouté");
-          setTimeout(() => location.href = "admin-products.html", 500);
+          setTimeout(() => location.href = "admin-products.html", 650);
         } catch (err) {
           toast(`Enregistrement impossible : ${err.message}`);
-          if (submitBtn) submitBtn.disabled = false;
+          setStatus(err.message || "Erreur d'upload.", "bad");
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = submitBtn.dataset.originalText || (existing ? "Enregistrer les modifications" : "Ajouter le produit");
+          }
         }
       };
     };

@@ -28,10 +28,10 @@
   <div class="product-image-editor">
     <div class="product-image-preview" id="productImagePreview"><span>Aucune image</span></div>
     <div class="image-controls">
-      <label>URL ou chemin relatif de l’image<input name="imageUrl" placeholder="assets/images/products/hennessy-vs.webp"></label>
-      <label>Ou choisir une petite image locale<input name="imageFile" type="file" accept="image/*"></label>
+      <label>URL d’image (optionnel)<input name="imageUrl" placeholder="https://.../image.webp"></label>
+      <label>Ou envoyer une image vers Supabase Storage<input name="imageFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
       <input type="hidden" name="imageData" id="productImageData">
-      <p class="small muted">Pour ce prototype, les petites images locales sont enregistrées dans le navigateur. Pour un site en production, utilisez un stockage serveur/CDN.</p>
+      <p class="small muted">JPG, PNG ou WebP • maximum 5 Mo. Avec Supabase configuré, la photo est envoyée automatiquement dans le bucket <code>product-images</code> puis son URL publique est enregistrée sur le produit.</p><p class="small image-upload-status" id="productImageUploadStatus"></p>
       <button class="btn btn-outline" type="button" id="removeProductImage">Retirer l’image</button>
     </div>
   </div>

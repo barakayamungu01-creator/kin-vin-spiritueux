@@ -178,3 +178,68 @@ footer{padding:60px 0 28px}.footer-grid{display:grid;grid-template-columns:2fr r
 .image-upload-status.warn{color:#e5c986}
 .image-upload-status.bad{color:#e9a3a3}
 .preview-image-error{place-items:center;width:100%;height:100%;color:var(--muted)}
+
+
+/* PHASE 6 — AFFICHAGE PRODUIT PROFESSIONNEL */
+.product-card .product-visual,
+.product-card .product-art,
+.product-card .product-image-area{
+  min-height:280px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px 22px 16px;
+}
+.real-product-image{
+  width:170px;
+  height:225px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  border-radius:0;
+  overflow:visible;
+  margin:0 auto;
+}
+.real-product-image::before,
+.real-product-image::after{display:none!important;content:none!important}
+.real-product-image .product-photo{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:225px;
+  object-fit:contain;
+  object-position:center;
+  padding:0;
+  margin:0 auto;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.real-product-image-detail{width:min(360px,80vw);height:480px}
+.real-product-image-detail .product-photo{max-width:100%;max-height:470px}
+.fallback-product-bottle{display:grid;place-items:center}
+.image-load-fallback{margin:0 auto}
+.product-image-wrap{background:transparent!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}
+.product-image-wrap::before,.product-image-wrap::after{display:none!important}
+.product-photo{background:transparent!important}
+.product-card{overflow:hidden}
+.product-card .badge,.product-card .pill,.product-card .product-badge{
+  max-width:calc(100% - 32px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+@media(max-width:700px){
+  .product-card .product-visual,.product-card .product-art,.product-card .product-image-area{
+    min-height:235px;padding:22px 16px 12px
+  }
+  .real-product-image{width:145px;height:190px}
+  .real-product-image .product-photo{max-height:190px}
+  .real-product-image-detail{width:min(300px,82vw);height:390px}
+  .real-product-image-detail .product-photo{max-height:380px}
+}

@@ -32,12 +32,21 @@ function addToCart(id,qty=1){state.cart[id]=(state.cart[id]||0)+qty;saveCart();t
 function setQty(id,qty){if(qty<=0)delete state.cart[id];else state.cart[id]=qty;saveCart()}
 function updateCartBadge(){$$(".cart-count").forEach(el=>el.textContent=cartCount())}
 function bottleHTML(p, cls="mini-bottle"){
- const fallback=`<div class="image-fallback-bottle" style="background:linear-gradient(90deg,#17110f,${p.tone||"#5c1e26"},#15100e)"><span>${p.name.split(" ").slice(0,2).join("<br>")}</span></div>`;
+ const fallback=`<div class="${cls} fallback-product-bottle" style="background:linear-gradient(90deg,#17110f,${p.tone||"#5c1e26"},#15100e)"><span>${p.name.split(" ").slice(0,2).join("<br>")}</span></div>`;
  if(p.image){
-   return `<div class="${cls} product-image-wrap"><img class="product-photo" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">${fallback}</div>`;
+   return `
+     <div class="real-product-image ${cls==="detail-bottle" ? "real-product-image-detail" : ""}">
+       <img class="product-photo" src="${p.image}" alt="${p.name}" loading="lazy"
+         onerror="this.parentElement.style.display='none';this.parentElement.nextElementSibling.style.display='grid'">
+     </div>
+     <div class="${cls} fallback-product-bottle image-load-fallback" style="display:none;background:linear-gradient(90deg,#17110f,${p.tone||"#5c1e26"},#15100e)">
+       <span>${p.name.split(" ").slice(0,2).join("<br>")}</span>
+     </div>
+   `;
  }
- return `<div class="${cls}" style="background:linear-gradient(90deg,#17110f,${p.tone||"#5c1e26"},#15100e)"><span>${p.name.split(" ").slice(0,2).join("<br>")}</span></div>`;
+ return fallback;
 }
+
 function productCard(p){
  if(p.active===false) return "";
  const sellPrice=(Number(p.promoPrice)>0 && Number(p.promoPrice)<Number(p.price))?Number(p.promoPrice):Number(p.price);

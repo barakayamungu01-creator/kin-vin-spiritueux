@@ -11,3 +11,9 @@ html.admin-auth-pending body{visibility:hidden}
 .admin-security-notice code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
 .admin-login-links{margin-top:20px;text-align:center}.admin-login-links a{color:var(--gold2);font-size:.82rem}
 .admin-logout-link{font-size:.78rem;color:#e9c985!important;border:1px solid rgba(200,163,95,.32);padding:8px 11px;border-radius:999px}
+
+.admin-forgot-row{display:flex;justify-content:flex-end;margin-top:-5px}
+.admin-forgot-row a{font-size:.78rem;color:var(--gold2)}
+.admin-forgot-row a:hover{text-decoration:underline}
+.admin-login-success{min-height:24px;color:#9fd6ae;font-size:.82rem;line-height:1.5}
+.password-guidance{font-size:.74rem;color:var(--muted);line-height:1.5;margin-top:-3px}

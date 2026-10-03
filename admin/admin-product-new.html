@@ -24,17 +24,40 @@
     <label class="span2">Description<textarea name="description" placeholder="Description du produit…" required></textarea></label>
   </div>
 
-  <h3 style="margin-top:28px">Image produit</h3>
-  <div class="product-image-editor">
-    <div class="product-image-preview" id="productImagePreview"><span>Aucune image</span></div>
-    <div class="image-controls">
-      <label>URL d’image (optionnel)<input name="imageUrl" placeholder="https://.../image.webp"></label>
-      <label>Ou envoyer une image vers Supabase Storage<input name="imageFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
-      <input type="hidden" name="imageData" id="productImageData">
-      <p class="small muted">JPG, PNG ou WebP • maximum 5 Mo. Avec Supabase configuré, la photo est envoyée automatiquement dans le bucket <code>product-images</code> puis son URL publique est enregistrée sur le produit.</p><p class="small image-upload-status" id="productImageUploadStatus"></p>
-      <button class="btn btn-outline" type="button" id="removeProductImage">Retirer l’image</button>
+  <h3 style="margin-top:28px">Images produit — diaporama</h3>
+  <p class="small muted">Ajoutez jusqu’à 2 images. Les deux auront le même fond blanc et défileront automatiquement sur le catalogue.</p>
+
+  <div class="two-image-editor">
+    <div class="product-image-editor product-image-slot">
+      <div>
+        <p class="eyebrow">IMAGE 1 • PRINCIPALE</p>
+        <div class="product-image-preview" id="productImagePreview1"><span>Aucune image</span></div>
+      </div>
+      <div class="image-controls">
+        <label>URL image 1 (optionnel)<input name="imageUrl1" placeholder="https://.../image-1.webp"></label>
+        <label>Ou choisir l’image 1<input name="imageFile1" type="file" accept="image/jpeg,image/png,image/webp"></label>
+        <input type="hidden" name="imageData1" id="productImageData1">
+        <p class="small image-upload-status" id="productImageUploadStatus1"></p>
+        <button class="btn btn-outline" type="button" id="removeProductImage1">Retirer l’image 1</button>
+      </div>
+    </div>
+
+    <div class="product-image-editor product-image-slot">
+      <div>
+        <p class="eyebrow">IMAGE 2</p>
+        <div class="product-image-preview" id="productImagePreview2"><span>Aucune image</span></div>
+      </div>
+      <div class="image-controls">
+        <label>URL image 2 (optionnel)<input name="imageUrl2" placeholder="https://.../image-2.webp"></label>
+        <label>Ou choisir l’image 2<input name="imageFile2" type="file" accept="image/jpeg,image/png,image/webp"></label>
+        <input type="hidden" name="imageData2" id="productImageData2">
+        <p class="small image-upload-status" id="productImageUploadStatus2"></p>
+        <button class="btn btn-outline" type="button" id="removeProductImage2">Retirer l’image 2</button>
+      </div>
     </div>
   </div>
+
+  <p class="small muted">JPG, PNG ou WebP • maximum 5 Mo par image • stockage dans <code>product-images</code>.</p>
 
   <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
     <a class="btn btn-outline" href="admin-products.html">Annuler</a>
@@ -43,4 +66,4 @@
 </form>
 </div></div></section></main>
 <footer><div class="container footer-bottom"><span>© 2026 KIN Vins & Spiritueux</span><a href="../catalogue.html">Voir la boutique</a></div></footer>
-<div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cartDrawer"><div class="drawer-head"><div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div><button class="icon-btn" id="closeCart">✕</button></div><div class="cart-items" id="drawerItems"></div><div class="drawer-foot"><div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div><a class="btn btn-gold full" href="../cart.html">Voir le panier</a></div></aside><div class="toast" id="toast"></div><script src="../assets/app.js"></script><script src="../assets/supabase-products.js"></script></body></html>
+<div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cartDrawer"><div class="drawer-head"><div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div><button class="icon-btn" id="closeCart">✕</button></div><div class="cart-items" id="drawerItems"></div><div class="drawer-foot"><div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div><a class="btn btn-gold full" href="../cart.html">Voir le panier</a></div></aside><div class="toast" id="toast"></div><script src="../assets/app.js"></script><script src="../assets/supabase-products.js"></script><script src="../assets/product-slideshow.js"></script></body></html>

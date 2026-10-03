@@ -1,21 +1,15 @@
-KINVINS.CD — PATCH PHASE 5
+KINVINS.CD — PATCH PHASE 8
 
-Ce patch ajoute :
-- admin/forgot-password.html
-- admin/update-password.html
-- lien "Mot de passe oublié ?" sur admin/login.html
+Fonction :
+- 2 images par produit
+- diaporama catalogue + fiche produit
+- flèches, points et défilement automatique
+- fond blanc identique pour les 2 images
+- ajout de 2 images dans l'admin
 
-Il NE modifie PAS :
-- assets/supabase-config.js
+Aucune migration SQL supplémentaire si product_images existe déjà.
 
-Après copie :
-1. Supabase > Authentication > URL Configuration
-2. Site URL : https://kinvins.cd
-3. Redirect URLs :
-   https://kinvins.cd/admin/update-password.html
-   http://localhost:8080/admin/update-password.html
-
-Puis :
+GitHub :
 git add -A
-git commit -m "Ajout reinitialisation mot de passe admin"
+git commit -m "Phase 8 - diaporama 2 images produits"
 git push

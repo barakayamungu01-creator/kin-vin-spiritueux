@@ -1,15 +1,19 @@
-KINVINS.CD — PATCH PHASE 8
+KINVINS.CD — PATCH PHASE 9
 
-Fonction :
-- 2 images par produit
-- diaporama catalogue + fiche produit
-- flèches, points et défilement automatique
-- fond blanc identique pour les 2 images
-- ajout de 2 images dans l'admin
+1. Copiez le patch dans votre projet.
+2. Ne remplacez PAS assets/supabase-config.js.
+3. Dans Supabase SQL Editor, exécutez le CONTENU de :
+   supabase/banners_phase9.sql
+4. Connectez-vous à :
+   /admin/login.html
+5. Admin → Bannières
+6. Modifiez « Accueil — Visuel principal ».
 
-Aucune migration SQL supplémentaire si product_images existe déjà.
+La bannière par défaut fournie :
+assets/images/banners/home-hero-desktop.webp
+1920×700, ~196 Ko.
 
 GitHub :
 git add -A
-git commit -m "Phase 8 - diaporama 2 images produits"
+git commit -m "Phase 9 - hero accueil administrable"
 git push

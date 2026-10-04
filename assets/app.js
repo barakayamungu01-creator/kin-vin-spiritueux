@@ -392,7 +392,7 @@ function setupAdminArticleForm(){
 document.addEventListener("DOMContentLoaded",()=>{setupHomeBlog();setupBlog();setupArticle();setupAdminBlog();setupAdminArticleForm()});
 
 
-const DEFAULT_BANNERS = [{"id": 1, "name": "Accueil — Offre premium", "zone": "home_hero", "title": "Une sélection premium livrée à Kinshasa.", "subtitle": "Découvrez nos vins, champagnes et spiritueux sélectionnés.", "buttonLabel": "Voir le catalogue", "buttonLink": "catalogue.html", "image": "", "mobileImage": "", "fallbackTone": "#5c1623", "textAlign": "left", "overlay": 48, "order": 1, "active": true, "startDate": "", "endDate": "", "alt": "Sélection premium KIN Vins & Spiritueux"}, {"id": 2, "name": "Catalogue — Promotions", "zone": "catalog_top", "title": "Découvrez nos offres du moment.", "subtitle": "Sélection de bouteilles à prix avantageux.", "buttonLabel": "Voir les produits", "buttonLink": "catalogue.html", "image": "", "mobileImage": "", "fallbackTone": "#3b2415", "textAlign": "left", "overlay": 52, "order": 1, "active": true, "startDate": "", "endDate": "", "alt": "Offres du catalogue KIN Vins & Spiritueux"}];
+const DEFAULT_BANNERS = [{"id": 1, "name": "Accueil — Visuel principal", "zone": "home_visual", "title": "", "subtitle": "", "buttonLabel": "", "buttonLink": "", "image": "assets/images/banners/home-hero-desktop.webp", "mobileImage": "", "fallbackTone": "#5c1623", "textAlign": "left", "overlay": 0, "order": 1, "active": true, "startDate": "", "endDate": "", "alt": "Bar premium à Kinshasa — KIN Vins & Spiritueux"}, {"id": 2, "name": "Catalogue — Promotions", "zone": "catalog_top", "title": "Découvrez nos offres du moment.", "subtitle": "Sélection de bouteilles à prix avantageux.", "buttonLabel": "Voir les produits", "buttonLink": "catalogue.html", "image": "", "mobileImage": "", "fallbackTone": "#3b2415", "textAlign": "left", "overlay": 52, "order": 1, "active": true, "startDate": "", "endDate": "", "alt": "Offres du catalogue KIN Vins & Spiritueux"}];
 let BANNERS = (() => {
   try{
     const saved=JSON.parse(localStorage.getItem("kin-site-banners")||"null");
@@ -415,6 +415,7 @@ function bannerIsScheduledNow(b){
 function bannerZoneLabel(zone){
  return ({
    home_hero:"Accueil — Hero",
+   home_visual:"Accueil — Visuel principal",
    home_promo:"Accueil — Promo",
    catalog_top:"Catalogue — Haut",
    blog_top:"Blog — Haut",
@@ -440,6 +441,39 @@ function bannerMarkup(b){
    </div>
  </article>`;
 }
+
+function homeHeroVisualMarkup(b){
+ const desktop=b?.image||"assets/images/banners/home-hero-desktop.webp";
+ const mobile=b?.mobileImage||desktop;
+ const media=`<picture class="home-hero-picture">
+   ${mobile?`<source media="(max-width:680px)" srcset="${mobile}">`:""}
+   <img src="${desktop}" alt="${b?.alt||"KIN Vins & Spiritueux — bar premium à Kinshasa"}" loading="eager" fetchpriority="high">
+ </picture>`;
+ const inner=`<div class="home-hero-image-shell">
+   ${media}
+   ${Number(b?.overlay)>0?`<div class="home-hero-image-overlay" style="background:rgba(0,0,0,${Math.max(0,Math.min(80,Number(b.overlay)||0))/100})"></div>`:""}
+ </div>`;
+ return b?.buttonLink
+   ? `<a class="home-hero-visual-link" href="${b.buttonLink}" aria-label="${b.alt||b.name||"Voir la sélection"}">${inner}</a>`
+   : inner;
+}
+
+function setupHomeHeroVisual(){
+ const host=$("[data-home-hero-visual]");
+ if(!host)return;
+ const list=BANNERS
+   .filter(b=>b.zone==="home_visual"&&bannerIsScheduledNow(b))
+   .sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0));
+ const selected=list[0]||{
+   name:"Accueil — Visuel principal",
+   image:"assets/images/banners/home-hero-desktop.webp",
+   mobileImage:"",
+   overlay:0,
+   alt:"Bar premium à Kinshasa — KIN Vins & Spiritueux"
+ };
+ host.innerHTML=homeHeroVisualMarkup(selected);
+}
+
 function setupManagedBanners(){
  $$("[data-banner-zone]").forEach(host=>{
    const zone=host.dataset.bannerZone;
@@ -532,7 +566,7 @@ function setupAdminBannerForm(){
    toast(existing?"Bannière modifiée":"Bannière créée");setTimeout(()=>location.href="admin-banners.html",500);
  };
 }
-document.addEventListener("DOMContentLoaded",()=>{setupManagedBanners();setupAdminBanners();setupAdminBannerForm()});
+document.addEventListener("DOMContentLoaded",()=>{setupHomeHeroVisual();setupManagedBanners();setupAdminBanners();setupAdminBannerForm()});
 
 
 const DEFAULT_CLIENTS = [{"id": 1, "type": "individual", "status": "active", "firstName": "Patrick", "lastName": "Mbuyi", "company": "", "email": "patrick@example.com", "phone": "+243 810 000 001", "city": "Kinshasa", "commune": "Gombe", "address": "Avenue exemple, Gombe", "createdAt": "2026-08-05", "lastOrderAt": "2026-09-17", "ordersCount": 4, "totalSpent": 326, "loyaltyPoints": 420, "tags": ["VIP", "Vin rouge"], "notes": "Préfère les livraisons en fin d’après-midi.", "proOffer": "", "taxId": "", "contactPerson": "", "creditLimit": 0}, {"id": 2, "type": "individual", "status": "active", "firstName": "Sarah", "lastName": "Kanku", "company": "", "email": "sarah@example.com", "phone": "+243 810 000 002", "city": "Kinshasa", "commune": "Ngaliema", "address": "Quartier Ma Campagne", "createdAt": "2026-08-22", "lastOrderAt": "2026-09-12", "ordersCount": 2, "totalSpent": 141, "loyaltyPoints": 160, "tags": ["Champagne"], "notes": "", "proOffer": "", "taxId": "", "contactPerson": "", "creditLimit": 0}, {"id": 3, "type": "professional", "status": "active", "firstName": "", "lastName": "", "company": "Hôtel Fleuve Démo", "email": "achats@hotel-demo.cd", "phone": "+243 810 000 100", "city": "Kinshasa", "commune": "Gombe", "address": "Boulevard du Fleuve", "createdAt": "2026-07-18", "lastOrderAt": "2026-09-18", "ordersCount": 14, "totalSpent": 4860, "loyaltyPoints": 0, "tags": ["Hôtel", "Grand compte"], "notes": "Livraison planifiée chaque vendredi.", "proOffer": "Premium", "taxId": "NIF-DEMO-001", "contactPerson": "Responsable achats", "creditLimit": 2500}, {"id": 4, "type": "professional", "status": "pending", "firstName": "", "lastName": "", "company": "Lounge Kin Démo", "email": "manager@lounge-demo.cd", "phone": "+243 810 000 101", "city": "Kinshasa", "commune": "Lingwala", "address": "Avenue du Commerce", "createdAt": "2026-09-14", "lastOrderAt": "", "ordersCount": 0, "totalSpent": 0, "loyaltyPoints": 0, "tags": ["Bar / Lounge"], "notes": "Compte Pro en attente de validation.", "proOffer": "Business", "taxId": "NIF-DEMO-002", "contactPerson": "Gérant", "creditLimit": 0}, {"id": 5, "type": "individual", "status": "inactive", "firstName": "Jean", "lastName": "Kalala", "company": "", "email": "jean@example.com", "phone": "+243 810 000 003", "city": "Kinshasa", "commune": "Limete", "address": "Limete résidentiel", "createdAt": "2026-06-09", "lastOrderAt": "2026-07-04", "ordersCount": 1, "totalSpent": 39, "loyaltyPoints": 40, "tags": [], "notes": "Compte désactivé à la demande du client.", "proOffer": "", "taxId": "", "contactPerson": "", "creditLimit": 0}];

@@ -294,3 +294,85 @@ footer{padding:60px 0 28px}.footer-grid{display:grid;grid-template-columns:2fr r
  .product-slideshow-detail,.product-photo-panel-detail{width:min(310px,82vw);height:390px}
  .product-slide-arrow{width:30px;height:30px}
 }
+
+
+/* ==========================================================
+   PHASE 9 — VISUEL HERO MODIFIABLE DEPUIS L'ADMIN
+   ========================================================== */
+.hero-banner-visual{
+  position:relative;
+  height:470px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#110e0c;
+  box-shadow:0 28px 70px rgba(0,0,0,.34);
+}
+
+.home-hero-image-shell,
+.home-hero-visual-link{
+  position:relative;
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+.home-hero-picture{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+.home-hero-picture img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+}
+
+.home-hero-image-overlay{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.home-hero-visual-link{
+  transition:transform .25s ease,filter .25s ease;
+}
+
+.home-hero-visual-link:hover{
+  transform:scale(1.012);
+  filter:brightness(1.04);
+}
+
+/* Les anciennes bouteilles artificielles ne sont plus utilisées dans le hero. */
+.hero-banner-visual .bottle,
+.hero-banner-visual .glow{
+  display:none!important;
+}
+
+@media(max-width:900px){
+  .hero-grid{
+    grid-template-columns:1fr;
+    padding-top:56px;
+    padding-bottom:56px;
+  }
+  .hero-banner-visual{
+    height:360px;
+    order:2;
+  }
+}
+
+@media(max-width:600px){
+  .hero-banner-visual{
+    height:300px;
+    border-radius:18px;
+  }
+  .home-hero-picture img{
+    object-position:center;
+  }
+}

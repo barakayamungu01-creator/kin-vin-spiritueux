@@ -6,7 +6,7 @@
 <h2 style="font-size:2.6rem" id="bannerFormTitle">Créer une bannière</h2>
 <div class="form-grid">
 <label>Nom interne<input name="name" required placeholder="Accueil — Promo septembre"></label>
-<label>Emplacement<select name="zone"><option value="home_hero">Accueil — Hero</option><option value="home_promo">Accueil — Promo</option><option value="catalog_top">Catalogue — Haut</option><option value="blog_top">Blog — Haut</option><option value="pro_top">KIN PRO — Haut</option></select></label>
+<label>Emplacement<select name="zone"><option value="home_visual">Accueil — Visuel principal</option><option value="home_hero">Accueil — Bannière pleine largeur</option><option value="home_promo">Accueil — Promo</option><option value="catalog_top">Catalogue — Haut</option><option value="blog_top">Blog — Haut</option><option value="pro_top">KIN PRO — Haut</option></select></label>
 <label class="span2">Titre<input name="title" placeholder="Une sélection premium livrée à Kinshasa"></label>
 <label class="span2">Sous-titre<textarea name="subtitle" placeholder="Votre message promotionnel…"></textarea></label>
 <label>Texte bouton<input name="buttonLabel" placeholder="Découvrir"></label>
@@ -21,6 +21,10 @@
 <label class="check-row"><input name="active" type="checkbox" checked> Bannière active</label>
 </div>
 
+<div class="admin-security-notice ready" style="margin:16px 0">
+<strong>Accueil — Visuel principal :</strong> cet emplacement remplace les 3 bouteilles dessinées de la page d’accueil.
+Pour cet emplacement, l’image desktop/mobile, le lien, l’alt, l’activation et les dates sont utilisés. Le titre et le sous-titre peuvent rester vides.
+</div>
 <h3 style="margin-top:28px">Images</h3>
 <div class="banner-images-grid">
  <div><p class="small muted">Desktop recommandé : 1920×700 ou 1600×600</p><div class="banner-image-preview" id="bannerImagePreview"><span>Aucune image desktop</span></div><label>URL / chemin image desktop<input name="imageUrl" placeholder="assets/images/banners/home-desktop.webp"></label><label>Ou fichier desktop<input name="imageFile" type="file" accept="image/*"></label><input type="hidden" name="imageData" id="bannerImageData"><button type="button" class="btn btn-outline" id="removeBannerImage">Retirer</button></div>
@@ -43,4 +47,4 @@
 <button class="btn btn-gold full" id="bannerSubmitLabel" type="submit">Créer la bannière</button><a class="btn btn-outline full" href="admin-banners.html" style="margin-top:8px">Annuler</a>
 </div></div></form></div></div></section></main>
 <footer><div class="container footer-bottom"><span>© 2026 KIN Vins & Spiritueux</span><a href="../index.html">Voir la boutique</a></div></footer>
-<div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cartDrawer"><div class="drawer-head"><div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div><button class="icon-btn" id="closeCart">✕</button></div><div class="cart-items" id="drawerItems"></div><div class="drawer-foot"><div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div><a class="btn btn-gold full" href="../cart.html">Voir le panier</a></div></aside><div class="toast" id="toast"></div><script src="../assets/app.js"></script><script src="../assets/supabase-products.js"></script><script src="../assets/product-slideshow.js"></script></body></html>
+<div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cartDrawer"><div class="drawer-head"><div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div><button class="icon-btn" id="closeCart">✕</button></div><div class="cart-items" id="drawerItems"></div><div class="drawer-foot"><div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div><a class="btn btn-gold full" href="../cart.html">Voir le panier</a></div></aside><div class="toast" id="toast"></div><script src="../assets/app.js"></script><script src="../assets/supabase-banners.js"></script><script src="../assets/supabase-products.js"></script><script src="../assets/product-slideshow.js"></script></body></html>

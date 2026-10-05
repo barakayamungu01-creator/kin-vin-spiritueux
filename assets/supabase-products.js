@@ -9,6 +9,11 @@
       !String(cfg.publishableKey).includes("VOTRE_CLE")
     );
 
+  // Le panier peut être lu avant que le catalogue Supabase soit disponible.
+  // Ces drapeaux empêchent cart.html d'afficher à tort "panier vide".
+  window.KIN_PRODUCTS_LOADING = configured();
+  window.KIN_PRODUCTS_READY = !configured();
+
   const adminToken = () => {
     try {
       const session = JSON.parse(sessionStorage.getItem("kinvins_admin_session") || "null");
@@ -271,14 +276,41 @@
   window.KinSupabaseProducts = ProductsAPI;
 
   async function refreshPublicProducts() {
-    if (!configured()) return;
+    if (!configured()) {
+      window.KIN_PRODUCTS_LOADING = false;
+      window.KIN_PRODUCTS_READY = true;
+      if (typeof refreshCartUI === "function") refreshCartUI();
+      return;
+    }
+
+    window.KIN_PRODUCTS_LOADING = true;
+
     try {
       PRODUCTS = await ProductsAPI.list();
+
+      window.KIN_PRODUCTS_READY = true;
+      window.KIN_PRODUCTS_LOADING = false;
+
       if (document.querySelector("#homeProducts")) setupHome();
       if (document.querySelector("#catalogGrid")) setupCatalogue();
       if (document.querySelector("#productDetail")) setupProduct();
+
+      // IMPORTANT : le panier utilise les IDs du catalogue Supabase.
+      // Il faut donc le recalculer seulement après chargement de PRODUCTS.
+      if (typeof refreshCartUI === "function") refreshCartUI();
+
+      window.dispatchEvent(new CustomEvent("kin:products-ready", {
+        detail: { count: PRODUCTS.length }
+      }));
     } catch (err) {
       console.error("Produits Supabase indisponibles :", err);
+
+      // Fin du statut "chargement" même si Supabase est indisponible.
+      // Le site peut alors utiliser les données locales de secours.
+      window.KIN_PRODUCTS_READY = true;
+      window.KIN_PRODUCTS_LOADING = false;
+
+      if (typeof refreshCartUI === "function") refreshCartUI();
     }
   }
 

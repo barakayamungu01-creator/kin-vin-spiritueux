@@ -17,17 +17,26 @@ function resetProducts(){
 }
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s), money=v=>`$${Number(v).toFixed(2)}`;
 
+function loadCartState(){
+ try{
+  const saved=JSON.parse(localStorage.getItem("kin-cart")||"{}");
+  return saved && typeof saved==="object" && !Array.isArray(saved) ? saved : {};
+ }catch{
+  return {};
+ }
+}
+
 const state={
-  cart:JSON.parse(localStorage.getItem("kin-cart")||"{}"),
+  cart:loadCartState(),
   currentProduct:null
 };
 
 function getProduct(id){return PRODUCTS.find(p=>p.id===Number(id))}
 function productPrice(p){const promo=Number(p?.promoPrice||0),base=Number(p?.price||0);return promo>0&&promo<base?promo:base}
 function saveCart(){localStorage.setItem("kin-cart",JSON.stringify(state.cart));updateCartBadge();renderDrawer()}
-function cartRows(){return Object.entries(state.cart).map(([id,qty])=>({product:getProduct(id),qty})).filter(r=>r.product)}
+function cartRows(){return Object.entries(state.cart).map(([id,qty])=>({product:getProduct(id),qty:Number(qty)||0})).filter(r=>r.product&&r.qty>0)}
 function cartCount(){return cartRows().reduce((s,r)=>s+r.qty,0)}
-function cartSubtotal(){return cartRows().reduce((s,r)=>s+r.product.price*r.qty,0)}
+function cartSubtotal(){return cartRows().reduce((s,r)=>s+productPrice(r.product)*r.qty,0)}
 function addToCart(id,qty=1){state.cart[id]=(state.cart[id]||0)+qty;saveCart();toast("Produit ajouté au panier")}
 function setQty(id,qty){if(qty<=0)delete state.cart[id];else state.cart[id]=qty;saveCart()}
 function updateCartBadge(){$$(".cart-count").forEach(el=>el.textContent=cartCount())}
@@ -118,15 +127,51 @@ function setupProduct(){
 }
 function setupCartPage(){
  const box=$("#cartPageItems"),summary=$("#cartPageSummary");if(!box)return;
+
+ if(window.KIN_PRODUCTS_LOADING===true && window.KIN_PRODUCTS_READY!==true){
+  box.innerHTML=`<div class="cart-loading-state"><span class="cart-loading-spinner"></span><div><strong>Chargement du panier…</strong><p class="small muted">Synchronisation avec le catalogue.</p></div></div>`;
+  if(summary) summary.innerHTML=`<div class="summary-row"><span>Panier</span><span class="muted">Chargement…</span></div>`;
+  return;
+ }
+
  function render(){
   const rows=cartRows();
-  box.innerHTML=rows.length?rows.map(({product:p,qty})=>`<div class="cart-line"><div class="cart-thumb">KIN</div><div><strong>${p.name}</strong><div class="small muted">${p.category} • ${p.volume}</div><button class="btn btn-outline" style="min-height:32px;padding:0 12px;margin-top:7px" data-remove="${p.id}">Supprimer</button></div><div class="qty-control"><button data-cdec="${p.id}">−</button><span>${qty}</span><button data-cinc="${p.id}">+</button></div><div><strong>${money(productPrice(p)*qty)}</strong></div></div>`).join(""):`<div style="padding:28px"><p>Votre panier est vide.</p><a class="btn btn-gold" href="catalogue.html">Voir le catalogue</a></div>`;
-  const sub=cartSubtotal();summary.innerHTML=`<div class="summary-row"><span>Sous-total</span><strong>${money(sub)}</strong></div><div class="summary-row"><span>Livraison</span><span>Calculée au checkout</span></div><div class="summary-row total"><span>Total produits</span><strong>${money(sub)}</strong></div><a class="btn btn-gold full" href="checkout.html" style="margin-top:16px">Passer au checkout</a>`;
+
+  box.innerHTML=rows.length?rows.map(({product:p,qty})=>`
+   <div class="cart-line">
+    <div class="cart-thumb">${p.image?`<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">`:"KIN"}</div>
+    <div>
+     <strong>${p.name}</strong>
+     <div class="small muted">${p.category} • ${p.volume}</div>
+     <button class="btn btn-outline" style="min-height:32px;padding:0 12px;margin-top:7px" data-remove="${p.id}">Supprimer</button>
+    </div>
+    <div class="qty-control"><button data-cdec="${p.id}">−</button><span>${qty}</span><button data-cinc="${p.id}">+</button></div>
+    <div><strong>${money(productPrice(p)*qty)}</strong></div>
+   </div>`).join("")
+   :`<div style="padding:28px"><p>Votre panier est vide.</p><a class="btn btn-gold" href="catalogue.html">Voir le catalogue</a></div>`;
+
+  const sub=cartSubtotal();
+
+  if(summary){
+   summary.innerHTML=`<div class="summary-row"><span>Sous-total</span><strong>${money(sub)}</strong></div>
+    <div class="summary-row"><span>Livraison</span><span>Calculée au checkout</span></div>
+    <div class="summary-row total"><span>Total produits</span><strong>${money(sub)}</strong></div>
+    ${rows.length?`<a class="btn btn-gold full" href="checkout.html" style="margin-top:16px">Passer au checkout</a>`:`<a class="btn btn-outline full" href="catalogue.html" style="margin-top:16px">Continuer mes achats</a>`}`;
+  }
+
   $$("[data-cdec]").forEach(b=>b.onclick=()=>{setQty(+b.dataset.cdec,(state.cart[b.dataset.cdec]||0)-1);render()});
   $$("[data-cinc]").forEach(b=>b.onclick=()=>{setQty(+b.dataset.cinc,(state.cart[b.dataset.cinc]||0)+1);render()});
   $$("[data-remove]").forEach(b=>b.onclick=()=>{setQty(+b.dataset.remove,0);render()});
  }
+
  render();
+}
+
+function refreshCartUI(){
+ updateCartBadge();
+ renderDrawer();
+ if($("#cartPageItems")) setupCartPage();
+ if($("#checkoutSummary")) setupCheckout();
 }
 function setupCheckout(){
  const sum=$("#checkoutSummary"),form=$("#checkoutForm");if(!sum||!form)return;
@@ -148,6 +193,13 @@ function setupAdmin(){
  const inv=$("#inventoryTable");if(inv)inv.innerHTML=PRODUCTS.map(p=>`<tr><td>${p.name}</td><td>${p.category}</td><td>${money(productPrice(p))}</td><td>${p.stock}</td><td><span class="status ${p.stock<10?"bad":p.stock<15?"warn":"ok"}">${p.stock<10?"Faible":p.stock<15?"À surveiller":"OK"}</span></td></tr>`).join("");
 }
 document.addEventListener("DOMContentLoaded",()=>{setupGlobalUI();setupHome();setupCatalogue();setupProduct();setupCartPage();setupCheckout();setupConfirmation();setupAccount();setupB2B();setupAdmin()});
+
+window.addEventListener("storage",e=>{
+ if(e.key==="kin-cart"){
+  state.cart=loadCartState();
+  refreshCartUI();
+ }
+});
 
 
 

@@ -1,15 +1,23 @@
-KINVINS.CD — PATCH PHASE 10
+KINVINS.CD — PATCH PHASE 11
 
-1. Copiez le patch dans votre projet.
-2. Ne remplacez PAS assets/supabase-config.js.
-3. Supabase → SQL Editor → exécutez le CONTENU de :
-   supabase/categories_phase10.sql
-4. Connectez-vous à l'admin.
-5. Admin → Catégories.
-6. Cliquez Modifier sur la catégorie voulue.
-7. Téléversez l'image puis Enregistrer.
+Corrige le bug :
+Ajouter au panier → Voir le panier → panier faussement vide.
 
-GitHub :
+Aucune mise à jour Supabase SQL nécessaire.
+
+Copiez le patch dans :
+C:\Users\user\Documents\kinvins_cd
+
+Puis :
 git add -A
-git commit -m "Phase 10 - gestion categories depuis admin"
+git commit -m "Phase 11 - correction persistance panier"
 git push
+
+Test :
+1. Ouvrir le catalogue.
+2. Ajouter 2 produits.
+3. Vérifier le compteur du panier.
+4. Ouvrir le tiroir panier.
+5. Cliquer « Voir le panier ».
+6. Les mêmes produits et quantités doivent être visibles.
+7. Actualiser cart.html : le panier doit rester présent.

@@ -466,3 +466,36 @@ footer{padding:60px 0 28px}.footer-grid{display:grid;grid-template-columns:2fr r
 @media(max-width:700px){
   .category-card{min-height:300px}
 }
+
+
+/* ==========================================================
+   PHASE 11 — SYNCHRONISATION PANIER / SUPABASE
+   ========================================================== */
+.cart-loading-state{
+  min-height:180px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding:28px;
+}
+.cart-loading-state p{margin:4px 0 0}
+.cart-loading-spinner{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:3px solid rgba(200,163,95,.22);
+  border-top-color:var(--gold);
+  animation:kin-cart-spin .8s linear infinite;
+}
+@keyframes kin-cart-spin{to{transform:rotate(360deg)}}
+.cart-thumb{
+  overflow:hidden;
+}
+.cart-thumb img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  background:#fff;
+}

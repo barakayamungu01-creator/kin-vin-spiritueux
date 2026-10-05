@@ -1,0 +1,39 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Modifier catégorie — Admin KIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css"><script src="../assets/supabase-config.js"></script><script src="config.js"></script><script src="admin-auth-guard.js"></script><link rel="stylesheet" href="assets/admin-auth.css"></head><body>
+<div class="topbar"><div class="container topbar-inner"><span>Livraison à Kinshasa</span><a href="../index.html">Voir le site</a></div></div>
+<header class="header"><div class="container nav"><a class="brand" href="../index.html"><span class="brand-mark">K</span><span class="brand-text"><strong>KIN</strong><small>VINS & SPIRITUEUX</small></span></a><nav id="navLinks"><a href="../index.html">Accueil</a><a class="active" href="admin.html">Admin</a><a href="#" id="adminLogoutBtn" class="admin-logout-link">Déconnexion</a></nav></div></header>
+<main><section class="page-hero"><div class="container"><p class="eyebrow">ADMINISTRATION • CATÉGORIE</p><h1 id="categoryFormHeading">Modifier la catégorie</h1></div></section>
+<section class="section"><div class="container admin-layout">
+<aside class="panel admin-sidebar"><a href="admin.html">Dashboard</a><a href="admin-products.html">Produits</a><a href="admin-product-import.html">Import produits</a><a class="active" href="admin-categories.html">Catégories</a><a href="admin-blog.html">Blog / SEO</a><a href="admin-banners.html">Bannières</a><a href="admin-clients.html">Clients</a><a href="stock.html">Stock</a><a href="orders.html">Commandes</a><a href="deliveries.html">Livraisons</a></aside>
+<div>
+<form id="adminCategoryForm" class="panel" style="padding:24px">
+<div class="form-grid two">
+<label>Numéro<input name="numberLabel" maxlength="4" placeholder="01"></label>
+<label>Ordre<input name="sortOrder" type="number" min="1" max="20" value="1"></label>
+<label>Titre<input name="title" required placeholder="Vins"></label>
+<label>Lien<input name="linkUrl" required placeholder="../catalogue.html?category=Vins"></label>
+<label style="grid-column:1/-1">Sous-titre<input name="subtitle" placeholder="Rouges, blancs, rosés"></label>
+<label style="grid-column:1/-1">Texte alternatif<input name="altText" placeholder="Sélection de vins rouges, blancs et rosés"></label>
+</div>
+
+<h3 style="margin-top:28px">Image</h3>
+<div class="product-image-editor">
+<div><div class="category-admin-preview" id="categoryPreview"><span class="eyebrow" id="categoryPreviewNumber">01</span><h3 id="categoryPreviewTitle">Vins</h3><p id="categoryPreviewSubtitle">Rouges, blancs, rosés</p></div></div>
+<div class="image-controls">
+<label>URL image (optionnel)<input name="imageUrl" placeholder="https://.../vins.webp"></label>
+<label>Ou téléverser une image<input name="imageFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
+<p class="category-image-upload-note">Recommandé : 1200×800 • JPG/PNG/WebP • maximum 700 Ko.</p>
+<button class="btn btn-outline" type="button" id="removeCategoryImage">Retirer l’image</button>
+</div>
+</div>
+
+<label class="check-row" style="margin-top:18px"><input name="active" type="checkbox" checked><span><strong>Catégorie active</strong><small>Décochez pour masquer cette carte sur l’accueil.</small></span></label>
+
+<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:24px">
+<a class="btn btn-outline" href="admin-categories.html">Annuler</a>
+<button class="btn btn-gold" id="categorySubmit" type="submit">Enregistrer</button>
+</div>
+</form>
+</div></div></section></main>
+<script src="../assets/app.js"></script><script src="categories-admin.js"></script></body></html>

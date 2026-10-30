@@ -1,0 +1,92 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Paiements — Admin KIN</title><link rel="stylesheet" href="../assets/styles.css"><script src="../assets/supabase-config.js"></script><script src="config.js"></script><script src="admin-auth-guard.js"></script><link rel="stylesheet" href="assets/admin-auth.css"></head><body>
+<main>
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">ADMINISTRATION</p>
+    <h1>Paiements Mobile Money</h1>
+    <p class="lead">Acompte 50 % à la commande, solde 50 % à la livraison.</p>
+  </div>
+</section>
+
+<section class="section">
+<div class="container admin-layout">
+  <aside class="panel admin-sidebar">
+    <a href="admin.html">Dashboard</a>
+    <a href="orders.html">Commandes</a>
+    <a href="admin-pro.html">KIN PRO</a>
+    <a class="active" href="admin-payments.html">Paiements</a>
+    <a href="../index.html">Voir la boutique</a>
+  </aside>
+
+  <div>
+    <form class="panel admin-payment-settings" id="paymentSettingsForm">
+      <div class="toolbar-admin">
+        <div>
+          <p class="eyebrow">ORANGE MONEY KINVINS</p>
+          <h2 style="font-size:2.3rem">Compte de réception</h2>
+          <p class="muted">Ces informations sont affichées au checkout.</p>
+        </div>
+      </div>
+
+      <div class="admin-payment-grid">
+        <label>Nom du bénéficiaire
+          <input name="receiverName" required value="KIN Vins & Spiritueux">
+        </label>
+        <label>Numéro Orange Money
+          <input name="receiverPhone" required placeholder="+243…">
+        </label>
+        <label>Code marchand
+          <input name="merchantCode" placeholder="Optionnel">
+        </label>
+        <label>Acompte (%)
+          <input name="depositPercent" type="number" min="1" max="99" step="1" value="50" required>
+        </label>
+        <label style="grid-column:1/-1">URL du QR code Orange Money
+          <input name="qrUrl" placeholder="https://...">
+        </label>
+      </div>
+
+      <button class="btn btn-gold" type="submit" style="margin-top:16px">Enregistrer la configuration</button>
+    </form>
+
+    <div class="toolbar-admin">
+      <div>
+        <h2 style="font-size:2.5rem">Acomptes à vérifier</h2>
+        <p class="muted">Vérifiez le crédit reçu sur Orange Money avant de confirmer.</p>
+      </div>
+      <button class="btn btn-outline" id="refreshPayments">Actualiser</button>
+    </div>
+
+    <div class="dashboard-grid payment-kpis">
+      <div class="panel kpi"><span>À VÉRIFIER</span><strong id="pendingPayments">0</strong></div>
+      <div class="panel kpi"><span>ACOMPTES VALIDÉS</span><strong id="paidPayments">0</strong></div>
+      <div class="panel kpi"><span>REFUSÉS</span><strong id="failedPayments">0</strong></div>
+    </div>
+
+    <div class="panel" style="padding:20px;margin-top:18px">
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th>Commande</th>
+            <th>Client</th>
+            <th>Réseau</th>
+            <th>Expéditeur</th>
+            <th>Référence</th>
+            <th>Acompte</th>
+            <th>Preuve</th>
+            <th>Statut</th>
+            <th>Action</th>
+          </tr></thead>
+          <tbody id="paymentsTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+</main>
+
+<div class="toast" id="toast"></div>
+<script src="../assets/app.js"></script>
+<script src="payments-admin.js"></script>
+</body></html>

@@ -1,23 +1,36 @@
-KINVINS.CD — PATCH PHASE 11
+KINVINS.CD — PHASE 13 : PORTAIL KIN PRO
 
-Corrige le bug :
-Ajouter au panier → Voir le panier → panier faussement vide.
+1. Décompressez ce patch dans :
+   C:\Users\user\Documents\kinvins_cd
 
-Aucune mise à jour Supabase SQL nécessaire.
+2. Ne remplacez PAS votre fichier configuré :
+   assets\supabase-config.js
 
-Copiez le patch dans :
-C:\Users\user\Documents\kinvins_cd
+3. Supabase → SQL Editor :
+   exécutez uniquement le CONTENU de :
+   supabase\pro_portal_phase13.sql
 
-Puis :
-git add -A
-git commit -m "Phase 11 - correction persistance panier"
-git push
+4. GitHub :
+   git add -A
+   git commit -m "Phase 13 - portail KIN PRO"
+   git push
 
-Test :
-1. Ouvrir le catalogue.
-2. Ajouter 2 produits.
-3. Vérifier le compteur du panier.
-4. Ouvrir le tiroir panier.
-5. Cliquer « Voir le panier ».
-6. Les mêmes produits et quantités doivent être visibles.
-7. Actualiser cart.html : le panier doit rester présent.
+5. Créez un compte professionnel :
+   /pro-register.html
+
+6. Admin :
+   /admin/admin-pro.html
+   Passez le compte en Actif et attribuez l'offre / remise / crédit.
+
+7. Le client peut ensuite utiliser :
+   - Dashboard
+   - Catalogue PRO
+   - Commande rapide
+   - Commandes
+   - Réassorts récurrents
+   - Devis
+   - Factures
+   - Crédit
+   - Profil entreprise
+
+Aucune nouvelle Edge Function n'est requise pour cette phase.

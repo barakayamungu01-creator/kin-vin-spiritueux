@@ -1,7 +1,7 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Checkout — kinvins.cd</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/styles.css"><script src="assets/supabase-config.js"></script></head><body>
 
-<div class="topbar"><div class="container topbar-inner"><span>Livraison à Kinshasa</span><span class="hide-mobile">Mobile Money • Visa • Mastercard</span><a href="b2b.html">WhatsApp</a></div></div>
+<div class="topbar"><div class="container topbar-inner"><span>Livraison à Kinshasa</span><span class="hide-mobile">Acompte 50 % • Orange Money</span><a href="b2b.html">WhatsApp</a></div></div>
 <header class="header"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">K</span><span class="brand-text"><strong>KIN</strong><small>VINS & SPIRITUEUX</small></span></a>
     <nav id="navLinks">
       <a class="" href="index.html">Accueil</a>
@@ -11,6 +11,72 @@
     </nav><div class="nav-actions"><button class="cart-btn" id="cartBtn">Panier <span class="cart-count">0</span></button><button class="menu-btn" id="menuBtn">☰</button></div></div></header>
 
 <main><section class="page-hero"><div class="container"><div class="breadcrumbs">Accueil / Panier / Checkout</div><p class="eyebrow">CHECKOUT</p><h1>Livraison & paiement</h1></div></section>
-<section class="section"><div class="container checkout-grid"><form class="panel checkout-box" id="checkoutForm"><h3>Informations de livraison</h3><div class="form-grid"><label>Nom complet<input required name="name"></label><label>Téléphone<input required name="phone" placeholder="+243…"></label><label class="span2">Adresse / repère<input required name="address"></label><label>Commune<select id="zone" required><option value="">Choisir</option><option data-fee="4">Gombe — $4</option><option data-fee="5">Lingwala — $5</option><option data-fee="6">Kintambo — $6</option><option data-fee="7">Ngaliema — $7</option><option data-fee="6">Limete — $6</option><option data-fee="7">Lemba — $7</option><option data-fee="10">Mont-Ngafula — $10</option></select></label><label>Livraison<select><option>Standard</option><option>Express</option><option>Programmée</option></select></label></div><h3 style="margin-top:28px">Paiement</h3><div class="payment-grid"><label class="payment-option"><input type="radio" name="pay" checked> M-Pesa</label><label class="payment-option"><input type="radio" name="pay"> Orange Money</label><label class="payment-option"><input type="radio" name="pay"> Airtel Money</label><label class="payment-option"><input type="radio" name="pay"> Visa / Mastercard</label><label class="payment-option"><input type="radio" name="pay"> Paiement livraison</label></div><label style="display:flex;gap:8px;margin:20px 0"><input type="checkbox" required> <span class="small">Je confirme avoir l’âge légal requis.</span></label><button class="btn btn-gold full">Confirmer la commande</button></form><div class="panel checkout-box"><p class="eyebrow">RÉCAPITULATIF</p><div id="checkoutSummary"></div></div></div></section></main>
+<section class="section"><div class="container checkout-grid"><form class="panel checkout-box" id="checkoutForm"><h3>Informations de livraison</h3><div class="form-grid"><label>Nom complet<input required name="name"></label><label>Téléphone<input required name="phone" placeholder="+243…"></label><label class="span2">Adresse / repère<input required name="address"></label><label>Commune<select id="zone" required><option value="">Choisir</option><option data-fee="4">Gombe — $4</option><option data-fee="5">Lingwala — $5</option><option data-fee="6">Kintambo — $6</option><option data-fee="7">Ngaliema — $7</option><option data-fee="6">Limete — $6</option><option data-fee="7">Lemba — $7</option><option data-fee="10">Mont-Ngafula — $10</option></select></label><label>Livraison<select><option>Standard</option><option>Express</option><option>Programmée</option></select></label></div><h3 style="margin-top:28px">Acompte Mobile Money — 50 %</h3>
+
+<div class="manual-payment-intro">
+  <p>Pour confirmer la commande, versez <strong>50 % maintenant</strong>. Le solde de <strong>50 %</strong> sera encaissé à la livraison.</p>
+</div>
+
+<div class="payment-grid mobile-payment-grid" id="manualPaymentNetworks">
+  <label class="payment-option payment-provider-card selected">
+    <input type="radio" name="payNetwork" value="orange_money" checked>
+    <span class="payment-provider-logo orange-logo">O</span>
+    <span><strong>Orange Money</strong><small>Paiement vers KINVINS</small></span>
+  </label>
+  <label class="payment-option payment-provider-card">
+    <input type="radio" name="payNetwork" value="mpesa">
+    <span class="payment-provider-logo mpesa-logo">M</span>
+    <span><strong>M-Pesa</strong><small>Transfert inter-réseaux si disponible</small></span>
+  </label>
+  <label class="payment-option payment-provider-card">
+    <input type="radio" name="payNetwork" value="airtel_money">
+    <span class="payment-provider-logo airtel-logo">A</span>
+    <span><strong>Airtel Money</strong><small>Transfert inter-réseaux si disponible</small></span>
+  </label>
+</div>
+
+<div class="manual-orange-card" id="orangePaymentInstructions">
+  <div class="manual-orange-head">
+    <div>
+      <p class="eyebrow">COMPTE DE RÉCEPTION</p>
+      <h4 id="paymentReceiverName">KIN Vins & Spiritueux</h4>
+    </div>
+    <span class="payment-provider-logo orange-logo">O</span>
+  </div>
+
+  <div class="manual-payment-details">
+    <div><span>Orange Money</span><strong id="paymentReceiverPhone">Configuration Admin requise</strong></div>
+    <div id="merchantCodeRow" class="hidden"><span>Code marchand</span><strong id="paymentMerchantCode"></strong></div>
+    <div><span>Acompte à transférer</span><strong id="paymentDepositAmount">—</strong></div>
+    <div><span>Solde à la livraison</span><strong id="paymentBalanceAmount">—</strong></div>
+  </div>
+
+  <img id="paymentQrCode" class="payment-qr hidden" alt="QR Code Orange Money KINVINS">
+
+  <p class="small muted" id="networkPaymentHelp">
+    Effectuez le transfert vers le compte Orange Money KINVINS, puis saisissez la référence de transaction ci-dessous.
+  </p>
+</div>
+
+<div class="manual-proof-form">
+  <label>Numéro ayant effectué le transfert
+    <input name="senderPhone" id="senderPhone" type="tel" required placeholder="+243…">
+  </label>
+
+  <label>Référence de la transaction
+    <input name="transactionReference" id="transactionReference" required placeholder="Ex. référence SMS / transaction">
+  </label>
+
+  <label>Montant envoyé
+    <input name="amountSent" id="amountSent" type="number" min="0" step="0.01" required>
+  </label>
+
+  <label>Preuve de paiement
+    <input name="paymentProof" id="paymentProof" type="file" accept="image/jpeg,image/png,image/webp,application/pdf">
+    <span class="small muted">Capture du SMS ou reçu. JPG, PNG, WebP ou PDF — maximum 5 Mo.</span>
+  </label>
+</div>
+
+<div class="payment-feedback hidden" id="paymentFeedback" role="status"></div><label style="display:flex;gap:8px;margin:20px 0"><input type="checkbox" required> <span class="small">Je confirme avoir l’âge légal requis.</span></label><button class="btn btn-gold full" id="checkoutSubmitButton" type="submit">J’ai payé l’acompte de 50 %</button></form><div class="panel checkout-box"><p class="eyebrow">RÉCAPITULATIF</p><div id="checkoutSummary"></div></div></div></section></main>
 <footer><div class="container footer-grid"><div><a class="brand" href="index.html"><span class="brand-mark">K</span><span class="brand-text"><strong>KIN</strong><small>VINS & SPIRITUEUX</small></span></a><p>Vins et spiritueux premium livrés à Kinshasa.</p></div><div><h4>Boutique</h4><a href="catalogue.html">Catalogue</a><a href="catalogue.html">Champagnes</a><a href="catalogue.html">Whiskies</a></div><div><h4>Services</h4><a href="b2b.html">Professionnels</a><a href="checkout.html">Livraison</a><a href="account.html">Compte client</a></div><div><h4>Contact</h4><span>Kinshasa, RDC</span><a href="mailto:contact@kinvins.cd">contact@kinvins.cd</a></div></div><div class="container footer-bottom"><span>© 2026 KIN Vins & Spiritueux</span><span>Vente réservée aux personnes ayant l’âge légal requis.</span></div></footer>
-<div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cartDrawer"><div class="drawer-head"><div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div><button class="icon-btn" id="closeCart">✕</button></div><div class="cart-items" id="drawerItems"></div><div class="drawer-foot"><div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div><a class="btn btn-gold full" href="cart.html">Voir le panier</a></div></aside><div class="toast" id="toast"></div><script src="assets/app.js"></script><script src="assets/supabase-banners.js"></script><script src="assets/supabase-products.js"></script><script src="assets/product-slideshow.js"></script></body></html>
+<div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cartDrawer"><div class="drawer-head"><div><p class="eyebrow">VOTRE COMMANDE</p><h3>Panier</h3></div><button class="icon-btn" id="closeCart">✕</button></div><div class="cart-items" id="drawerItems"></div><div class="drawer-foot"><div class="cart-total"><span>Sous-total</span><strong id="drawerTotal">$0.00</strong></div><a class="btn btn-gold full" href="cart.html">Voir le panier</a></div></aside><div class="toast" id="toast"></div><script src="assets/app.js"></script><script src="assets/supabase-banners.js"></script><script src="assets/supabase-products.js"></script><script src="assets/product-slideshow.js"></script><script src="assets/manual-payments.js"></script></body></html>

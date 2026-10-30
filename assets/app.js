@@ -174,6 +174,8 @@ function refreshCartUI(){
  if($("#checkoutSummary")) setupCheckout();
 }
 function setupCheckout(){
+ if(window.KinManualPayments?.setupCheckout)return window.KinManualPayments.setupCheckout();
+ if(window.KinMobilePayments?.setupCheckout)return window.KinMobilePayments.setupCheckout();
  const sum=$("#checkoutSummary"),form=$("#checkoutForm");if(!sum||!form)return;
  function render(){
   const sub=cartSubtotal(), opt=$("#zone")?.selectedOptions?.[0], fee=opt?+(opt.dataset.fee||0):0;
@@ -182,7 +184,19 @@ function setupCheckout(){
  $("#zone").onchange=render;render();
  form.onsubmit=e=>{e.preventDefault();if(!cartRows().length){toast("Votre panier est vide");return}const order="KIN-"+Math.floor(100000+Math.random()*900000);sessionStorage.setItem("kin-last-order",order);sessionStorage.setItem("kin-last-total",sum.querySelector(".total strong").textContent);state.cart={};saveCart();location.href="confirmation.html"};
 }
-function setupConfirmation(){const o=$("#orderNumber"),t=$("#orderTotal");if(o)o.textContent=sessionStorage.getItem("kin-last-order")||"KIN-XXXXXX";if(t)t.textContent=sessionStorage.getItem("kin-last-total")||"$0.00"}
+function setupConfirmation(){
+ const o=$("#orderNumber"),t=$("#orderTotal"),m=$("#orderPaymentMethod"),
+       d=$("#orderDeposit"),b=$("#orderBalance");
+ if(o)o.textContent=sessionStorage.getItem("kin-last-order")||"KIN-XXXXXX";
+ if(t)t.textContent=sessionStorage.getItem("kin-last-total")||"$0.00";
+ if(d)d.textContent=sessionStorage.getItem("kin-last-deposit")||"—";
+ if(b)b.textContent=sessionStorage.getItem("kin-last-balance")||"—";
+ if(m){
+  const key=sessionStorage.getItem("kin-last-payment-method")||"";
+  const labels={orange_money:"Orange Money",mpesa:"M-Pesa",airtel_money:"Airtel Money",manual_mobile:"Mobile Money"};
+  m.textContent=labels[key]||"Mobile Money";
+ }
+}
 function setupAccount(){
  const login=$("#loginForm"),register=$("#registerForm");if(login)login.onsubmit=e=>{e.preventDefault();localStorage.setItem("kin-user","Client Démo");location.href="account.html"};
  if(register)register.onsubmit=e=>{e.preventDefault();localStorage.setItem("kin-user","Nouveau client");location.href="account.html"};
